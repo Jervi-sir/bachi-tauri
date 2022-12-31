@@ -1,0 +1,112 @@
+<template>
+  <div class="body">
+    <TodayDate />
+    <div class="content">
+      <div class="left">
+        <div class="top">
+          <div class="today-amount">
+            <label for="">Total d'aujourd'hui</label>
+            <input type="text" placeholder="00,000 DA">
+          </div>
+          <div class="search-name">
+            <input type="text" placeholder="Nom">
+            <button><img src="images/search.svg" alt=""></button>
+          </div>
+        </div>
+        <UserTable />
+      </div>
+      <div class="right">
+        <TodayStats />
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import TodayDate from '../components/TodayDate.vue';
+import UserTable from '../components/UserTable.vue';
+import TodayStats from '../components/TodayStats.vue';
+
+export default {
+  name: 'HomeView',
+  components: {
+    TodayDate,
+    UserTable,
+    TodayStats
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+  .body {
+    flex: auto;
+    .content {
+      display: flex;
+      justify-content: space-between;
+      flex: 1;
+      gap: 4rem;
+    }
+    .left {
+      width: 80%;
+      .top {
+        display: flex;
+        justify-content: space-between;
+        .today-amount {
+          display: flex;
+          align-items: center;
+          background: #D9D9D9;
+          border-radius: 10px;
+          padding: 5px 10px;
+          gap: 1rem;
+          label {
+            font-weight: 300;
+            font-size: 18px;
+            color: #545454;
+          }
+          input {
+            font-weight: 500;
+            font-size: 22px;
+            width: 10rem;
+            color: #545454;
+            background: transparent;
+            border: none;
+          }
+        }
+        .search-name {
+          display: flex;
+          align-items: center;
+          background: #FFFFFF;
+          box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.05);
+          border-radius: 10px;
+          padding: 5px 10px;
+          gap: 1rem;
+          input {
+            font-weight: 400;
+            font-size: 16px;
+            color: #BABABA;
+            background: transparent;
+            border: none;
+          }
+          button {
+            background: transparent;
+            border: none;
+          }
+        }
+      }
+    }
+    .right {
+      width: 20%;
+      text-align: center;
+      background: #FFFFFF;
+      box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.05);
+      border-radius: 40px;
+      padding: 2rem 3rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      
+    }
+  }
+</style>
