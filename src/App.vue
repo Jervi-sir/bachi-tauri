@@ -18,8 +18,8 @@ body {
 #app {
   display: flex;
   background: #F9F9FB;
-  font-family: 'Inter', sans-serif;
   gap: 2rem;
+  font-family: 'Inter', sans-serif !important;
 }
 
 header {
