@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import AddUser from '../views/AddUser.vue'
+import AddWorker from '../views/AddWorker.vue'
+import AddChantier from '../views/AddChantier.vue'
 
 const routes = [
   {
@@ -9,9 +10,14 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/add_user',
-    name: 'add_user',
-    component: AddUser
+    path: '/add_worker',
+    name: 'add_worker',
+    component: AddWorker
+  },
+  {
+    path: '/add_chantier',
+    name: 'add_chantier',
+    component: AddChantier
   },
   {
     path: '/about',

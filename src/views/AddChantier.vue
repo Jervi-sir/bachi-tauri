@@ -1,15 +1,11 @@
 <template>
   <div class="about">
     <TodayDate />
-    <form action="">
-      <h1>Ajouter un travailleur</h1>
-      <input type="text" placeholder="Nom">
-      <input type="date" placeholder="BirthDay">
-      <input type="text" placeholder="Phone Number">
-      <input type="text" placeholder="location">
-      <input type="text" placeholder="position">
-      <input type="text" placeholder="chantier">
-      <button>Ajouter</button>
+    <form class="form" @submit="addChantier">
+      <h1>Ajouter un chantier</h1>
+      <input type="text" placeholder="Nom" v-model="name">
+      <input type="text" placeholder="location" v-model="location">
+      <button >Ajouter</button>
     </form>
   </div>
 </template>
@@ -17,9 +13,22 @@
 <script>
 // @ is an alias to /src
 import TodayDate from '../components/TodayDate.vue';
+import { insertChantier } from '../functions/db';
 
 export default {
-  name: 'AddUser',
+  data () {
+    return {
+      name: '',
+      location: ''
+    }
+  },
+  methods: {
+    addChantier () { 
+      e.preventDefault();
+      insertChantier(this.name, this.location);
+    },
+  },
+  name: 'AddChantier',
   components: {
     TodayDate
   }
@@ -27,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  form {
+  .form {
     background: #FFFFFF;
     border-radius: 25px;
     display: flex;

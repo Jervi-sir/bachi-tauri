@@ -13,7 +13,8 @@ export async function createTables() {
     CREATE TABLE IF NOT EXISTS chantiers (
       chantier_id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT,
-      location TEXT
+      location TEXT,
+      created_at DATE
     ); 
     CREATE TABLE IF NOT EXISTS workers (
       worker_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -22,16 +23,16 @@ export async function createTables() {
       phone_number TEXT,
       position TEXT,
       chantier_id INTEGER,
-      joined_at DATE,
-      FOREIGN KEY(chantier_id) REFERENCES chantiers(chantier_id)
+      FOREIGN KEY(chantier_id) REFERENCES chantiers(chantier_id),
+      created_at DATE
     );  
     CREATE TABLE IF NOT EXISTS worker_chantiers(
       worker_chantier_id INTEGER PRIMARY KEY AUTOINCREMENT,
       worker_id INTEGER,
       chantier_id INTEGER,
-      joined_at DATE,
       FOREIGN KEY(chantier_id) REFERENCES workers(worker_id),
-      FOREIGN KEY(worker_id) REFERENCES chantiers(chantier_id)
+      FOREIGN KEY(worker_id) REFERENCES chantiers(chantier_id),
+      created_at DATE
     );
     CREATE TABLE IF NOT EXISTS todays(
       today_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -39,7 +40,8 @@ export async function createTables() {
       today_date DATE,
       total_invested TEXT,
       total_spent TEXT,
-      FOREIGN KEY(today_id) REFERENCES chantiers(chantier_id)
+      FOREIGN KEY(today_id) REFERENCES chantiers(chantier_id),
+      created_at DATE
     );
     CREATE TABLE IF NOT EXISTS today_works (
       today_work_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -49,14 +51,16 @@ export async function createTables() {
       is_absent BOOL,
       revenue TEXT,
       hour_worked TEXT,
-      FOREIGN KEY(chantier_id) REFERENCES chantiers(chantier_id)
-      FOREIGN KEY(worker_id) REFERENCES workers(worker_id)
-      FOREIGN KEY(today_id) REFERENCES todays(today_id)
+      FOREIGN KEY(chantier_id) REFERENCES chantiers(chantier_id),
+      FOREIGN KEY(worker_id) REFERENCES workers(worker_id),
+      FOREIGN KEY(today_id) REFERENCES todays(today_id),
+      created_at DATE
     );
   `)
 }
 
-export async function insert() {
-  await db.execute('INSERT INTO users VALUES (?1, ?2)', ['Jack', 18]);
+export async function insertChantier(name, location) {
+  const db = await connect();
+  await db.execute("INSERT INTO chantiers ('name', 'location') VALUES (?1, ?2)", [name, location]);
 }
 
