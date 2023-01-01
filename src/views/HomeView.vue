@@ -10,7 +10,7 @@
           </div>
           <div class="search-name">
             <input type="text" placeholder="Nom">
-            <button><img src="images/search.svg" alt=""></button>
+            <button><img src="../assets/images/search.svg" alt=""></button>
           </div>
         </div>
         <UserTable />
@@ -28,8 +28,11 @@
 import TodayDate from '../components/TodayDate.vue';
 import UserTable from '../components/UserTable.vue';
 import TodayStats from '../components/TodayStats.vue';
+import { createTables } from '../functions/db';
 
 export default {
+  methods: {
+  },
   name: 'HomeView',
   components: {
     TodayDate,
@@ -37,6 +40,9 @@ export default {
     TodayStats
   }
 }
+
+createTables();
+
 </script>
 
 <style lang="scss" scoped>
