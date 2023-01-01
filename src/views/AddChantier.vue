@@ -1,11 +1,7 @@
 <template>
   <div class="about">
     <TodayDate />
-    <Transition>
-      <div class="added-scc" v-if="added_success">
-        added successfully
-      </div>
-    </Transition>
+    <SuccessMessage :isActive="added_success"/>
     <form class="form" @submit="addChantier">
       <h1>Ajouter un chantier</h1>
       <input type="text" placeholder="Nom" v-model="name" required>
@@ -18,6 +14,7 @@
 <script>
 // @ is an alias to /src
 import TodayDate from '../components/TodayDate.vue';
+import SuccessMessage from '../components/SuccessMessage.vue';
 import { insertChantier } from '../functions/db';
 
 export default {
@@ -44,22 +41,22 @@ export default {
   },
   name: 'AddChantier',
   components: {
-    TodayDate
+    TodayDate,
+    SuccessMessage
   }
 }
 </script>
 
 <style lang="scss" scoped>
-/* we will explain what these classes do next! */
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-}
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 0.5s ease;
+  }
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
+  }
+  
   .form {
     background: #FFFFFF;
     border-radius: 25px;
