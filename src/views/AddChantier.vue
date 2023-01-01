@@ -1,10 +1,15 @@
 <template>
   <div class="about">
     <TodayDate />
+    <Transition>
+      <div class="added-scc" v-if="added_success">
+        added successfully
+      </div>
+    </Transition>
     <form class="form" @submit="addChantier">
       <h1>Ajouter un chantier</h1>
-      <input type="text" placeholder="Nom" v-model="name">
-      <input type="text" placeholder="location" v-model="location">
+      <input type="text" placeholder="Nom" v-model="name" required>
+      <input type="text" placeholder="location" v-model="location" required>
       <button >Ajouter</button>
     </form>
   </div>
@@ -19,13 +24,22 @@ export default {
   data () {
     return {
       name: '',
-      location: ''
+      location: '',
+      added_success: false
     }
   },
   methods: {
-    addChantier () { 
+    addChantier (e) { 
       e.preventDefault();
       insertChantier(this.name, this.location);
+      this.added_success = true;
+      this.name = '';
+      this.location = '';
+
+      setTimeout(() => {
+        this.added_success = false;
+      }, 1000);
+
     },
   },
   name: 'AddChantier',
@@ -36,6 +50,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
   .form {
     background: #FFFFFF;
     border-radius: 25px;
