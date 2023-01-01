@@ -4,7 +4,11 @@
     <form action="">
       <h1>Ajouter un travailleur</h1>
       <input type="text" placeholder="Nom">
+      <input type="date" placeholder="BirthDay">
       <input type="text" placeholder="Phone Number">
+      <input type="text" placeholder="location">
+      <input type="text" placeholder="position">
+      <input type="text" placeholder="chantier">
       <button>Ajouter</button>
     </form>
   </div>

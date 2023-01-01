@@ -1,0 +1,37 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>180</x><y>90</y><w>150</w><h>140</h></coordinates><panel_attributes>_workers_
+--
+id: id
+name: text
+birthday: date
+phone_number: text
+location: text
+position: text
+joined_at: date
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>320</y><w>150</w><h>70</h></coordinates><panel_attributes>_chantiers_
+--
+id: id
+name: text
+location: text
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>410</x><y>320</y><w>130</w><h>100</h></coordinates><panel_attributes>_today_
+--
+id: id
+chantier_id
+today_date: date
+total_invested: text
+total_spent: text
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>410</x><y>90</y><w>130</w><h>150</h></coordinates><panel_attributes>_today_works_
+--
+id: id
+worker_id
+chantier_id
+today_id
+is_absert: boolean
+revenue: text
+hour_worked: int
+current_date: date
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>140</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>470</x><y>230</y><w>30</w><h>110</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>190</y><w>110</w><h>180</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;50;10;50;160;10;160</additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>360</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>70</x><y>320</y><w>130</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50;110;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>20</x><y>240</y><w>120</w><h>90</h></coordinates><panel_attributes>_worker_chantiers_
+--
+id: id
+worker_id: fk
+chantier_id: fk
+jointed_at: date</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>70</x><y>170</y><w>130</w><h>90</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;70;10;10;110;10</additional_attributes></element></diagram>
