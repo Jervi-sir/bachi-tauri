@@ -20,7 +20,9 @@
           <td>{{ worker.location }}</td>
           <td>{{ worker.position }}</td>
           <td><button @click="editWorker(index)">edit</button></td>
-          <td><button @click="viewWorker(worker.id)">stats</button></td>
+          <td>
+            <WorkerView :worker_id="worker.id"/>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -35,21 +37,12 @@
       <button>Update</button>
     </form>
 
-    <div class="form" v-if="stats.show">
-      <h1>Show {{ this.stats.name }} Worker</h1>
-      <label for="">name:</label><span>{{ this.stats.name }}</span> <br>
-      <label for="">birthday:</label><span>{{ this.stats.birthday }}</span> <br>
-      <label for="">phone_number:</label><span>{{ this.stats.phone_number }}</span> <br>
-      <label for="">location:</label><span>{{ this.stats.location }}</span> <br>
-      <label for="">position:</label><span>{{ this.stats.position }}</span> <br>
-      <label for="">created_at:</label><span>{{ this.stats.created_at }}</span> <br>
-    </div>
-
   </div>
 </template>
 
 <script>
-import { getWorker, updateWorker as updateWr } from '../../functions/db';
+import { updateWorker as updateWr } from '../../functions/db';
+import WorkerView from './view.vue';
 
 export default {
   methods: {
@@ -75,16 +68,7 @@ export default {
       this.modal.location = this.workers[index].location;
       this.modal.position = this.workers[index].position;
     },
-    async viewWorker (id) {
-      const workerDB = await getWorker(id);
-      this.stats.show = true;
-      this.stats.name = workerDB[0].name;
-      this.stats.birthday = workerDB[0].birthday;
-      this.stats.phone_number = workerDB[0].phone_number;
-      this.stats.location = workerDB[0].location;
-      this.stats.position = workerDB[0].position;
-      this.stats.created_at = workerDB[0].created_at;
-    }
+    
   },
   data () {
     return {
@@ -98,22 +82,16 @@ export default {
         location: '',
         position: '',
         created_at: ''
-      },
-      stats: {
-        show: true,
-        name: '',
-        birthday: '',
-        phone_number: '',
-        location: '',
-        position: '',
-        created_at: ''
       }
     }
   },
 
   
   name: 'WorkerTable',
-  props: ['workers']
+  props: ['workers'],
+  components: {
+    WorkerView,
+  }
 
 }
 </script>
