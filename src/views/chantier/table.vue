@@ -16,7 +16,9 @@
           <td>{{ chantier.location }}</td>
           <td>{{ chantier.created_at }}</td>
           <td><button @click="editChantier(index)">edit</button></td>
-          <td><button @click="viewChantier(chantier.id)">stats</button></td>
+          <td>
+            <ChantierView :chantier_id="chantier.id" />
+          </td>
         </tr>
       </tbody>
     </table>
@@ -27,21 +29,12 @@
       <input type="text" placeholder="location" v-model="modal.location" required>
       <button>Update</button>
     </form>
-
-    <div class="form" v-if="stats.show">
-      <h1>Show {{ this.stats.name }} Chantier</h1>
-      <label for="">name:</label><span>{{ this.stats.name }}</span> <br>
-      <label for="">location:</label><span>{{ this.stats.location }}</span> <br>
-      <label for="">nb_worker:</label><span>{{ this.stats.nb_worker }}</span> <br>
-      <label for="">total_spent:</label><span>{{ this.stats.total_spent }}</span> <br>
-      <label for="">created_at:</label><span>{{ this.stats.created_at }}</span> <br>
-    </div>
-
   </div>
 </template>
 
 <script>
-import { updateChantier as updateCh, getChantier } from '../../functions/db';
+import { updateChantier as updateCh } from '../../functions/db';
+import ChantierView from './view.vue';
 
 export default {
   methods: {
@@ -57,15 +50,6 @@ export default {
       this.modal.original_name = this.chantiers[index].name;
       this.modal.name = this.chantiers[index].name;
       this.modal.location = this.chantiers[index].location;
-    },
-    async viewChantier(id) {
-      const chantierDB = await getChantier(id);
-      this.stats.show = true;
-      this.stats.name = chantierDB[0].name;
-      this.stats.location = chantierDB[0].location;
-      this.stats.created_at = chantierDB[0].created_at;
-      this.stats.nb_worker = chantierDB[0].name;
-      this.stats.total_spent = chantierDB[0].name;
     }
   },
   data () {
@@ -76,19 +60,14 @@ export default {
         original_name: '',
         name: '',
         location: ''
-      },
-      stats: {
-        show: true,
-        name: '',
-        location: '',
-        created_at: '',
-        nb_worker: '',
-        total_spent: ''
       }
     }
   },
   name: 'ChantierTable',
-  props: ['chantiers']
+  props: ['chantiers'],
+  components: {
+    ChantierView,
+  }
 }
 </script>
 
