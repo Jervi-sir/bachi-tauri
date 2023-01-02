@@ -1,7 +1,7 @@
 <template>
-  <div class="about">
+  <div class="body">
     <TodayDate />
-    <SuccessMessage :isActive="added_success"/>
+    <ChantierRoutes />
     <form class="form" @submit="addChantier">
       <h1>Ajouter un chantier</h1>
       <input type="text" placeholder="Nom" v-model="name" required>
@@ -13,11 +13,13 @@
 
 <script>
 // @ is an alias to /src
-import TodayDate from '../components/TodayDate.vue';
-import SuccessMessage from '../components/SuccessMessage.vue';
-import { insertChantier } from '../functions/db';
+import TodayDate from '../../components/TodayDate.vue';
+import { insertChantier } from '../../functions/db';
+import ChantierRoutes from './routes.vue';
 
 export default {
+  watch: {
+  },
   data () {
     return {
       name: '',
@@ -35,6 +37,7 @@ export default {
 
       setTimeout(() => {
         this.added_success = false;
+        document.location.reload(true);
       }, 1000);
 
     },
@@ -42,7 +45,7 @@ export default {
   name: 'AddChantier',
   components: {
     TodayDate,
-    SuccessMessage
+    ChantierRoutes
   }
 }
 </script>

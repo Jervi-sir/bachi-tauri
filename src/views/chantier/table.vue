@@ -41,9 +41,11 @@
 </template>
 
 <script>
-import { updateChantier as updateCh, getChantier } from '../functions/db';
+import { updateChantier as updateCh, getChantier } from '../../functions/db';
 
 export default {
+  props: {
+  },
   methods: {
     updateChantier (e) { 
       updateCh(this.modal.chantier_id, this.modal.name, this.modal.location);

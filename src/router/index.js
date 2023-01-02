@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AddWorker from '../views/AddWorker.vue'
-import AddChantier from '../views/AddChantier.vue'
-import ListChantier from '../views/ListChantier.vue'
+import Chantier from '../views/chantier/index.vue'
+import AddChantier from '../views/chantier/add.vue'
 
 const routes = [
   {
@@ -16,14 +16,14 @@ const routes = [
     component: AddWorker
   },
   {
-    path: '/add_chantier',
-    name: 'add_chantier',
-    component: AddChantier
+    path: '/chantier',
+    name: 'chantier',
+    component: Chantier
   },
   {
-    path: '/list_chantier',
-    name: 'list_chantier',
-    component: ListChantier
+    path: '/chantier/add',
+    name: 'chantier/add',
+    component: AddChantier
   },
   {
     path: '/about',
