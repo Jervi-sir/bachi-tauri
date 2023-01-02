@@ -4,15 +4,19 @@
       <thead>
         <tr>
           <th data-pos-left="data-pos-left">Nom</th>
-          <th>Absence</th>
+          <th>location</th>
+          <th>date</th>
           <th>edit</th>
+          <th>view</th>
         </tr>
       </thead>
       <tbody class="compar-table_zebra">
         <tr class="chantier" v-for="(chantier, index) in chantiers" v-bind:key="index">
           <td>{{ chantier.name }}</td>
           <td>{{ chantier.location }}</td>
+          <td>{{ chantier.created_at }}</td>
           <td><button @click="editChantier(index)">edit</button></td>
+          <td><button @click="viewChantier(chantier.chantier_id)">stats</button></td>
         </tr>
       </tbody>
     </table>
@@ -23,11 +27,21 @@
       <input type="text" placeholder="location" v-model="modal.location" required>
       <button>Update</button>
     </form>
+
+    <div class="form" v-if="stats.show">
+      <h1>Edit {{ modal.original_name }} Chantier</h1>
+      <label for="">name:</label><span>{{ this.stats.name }}</span> <br>
+      <label for="">location:</label><span>{{ this.stats.location }}</span> <br>
+      <label for="">nb_worker:</label><span>{{ this.stats.nb_worker }}</span> <br>
+      <label for="">total_spent:</label><span>{{ this.stats.total_spent }}</span> <br>
+      <label for="">created_at:</label><span>{{ this.stats.created_at }}</span> <br>
+    </div>
+
   </div>
 </template>
 
 <script>
-import { updateChantier as updateCh } from '../functions/db';
+import { updateChantier as updateCh, getChantier } from '../functions/db';
 
 export default {
   methods: {
@@ -42,6 +56,15 @@ export default {
       this.modal.name = this.chantiers[index].name;
       this.modal.location = this.chantiers[index].location;
     },
+    async viewChantier(id) {
+      const chantierDB = await getChantier(id);
+      this.stats.show = true;
+      this.stats.name = chantierDB[0].name;
+      this.stats.location = chantierDB[0].location;
+      this.stats.created_at = chantierDB[0].created_at;
+      this.stats.nb_worker = chantierDB[0].name;
+      this.stats.total_spent = chantierDB[0].name;
+    }
   },
   data () {
     return {
@@ -51,6 +74,14 @@ export default {
         original_name: '',
         name: '',
         location: ''
+      },
+      stats: {
+        show: true,
+        name: '',
+        location: '',
+        created_at: '',
+        nb_worker: '',
+        total_spent: ''
       }
     }
   },

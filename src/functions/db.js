@@ -61,7 +61,8 @@ export async function createTables() {
 
 export async function insertChantier(name, location) {
   const db = await connect();
-  await db.execute("INSERT INTO chantiers ('name', 'location') VALUES (?1, ?2)", [name, location]);
+  let today = new Date().toLocaleDateString()
+  await db.execute("INSERT INTO chantiers ('name', 'location', 'created_at') VALUES (?1, ?2, ?3)", [name, location, today]);
 }
 
 export async function allChantier() {
@@ -73,4 +74,10 @@ export async function allChantier() {
 export async function updateChantier(id, name, location) {
   const db = await connect();
   await db.execute("UPDATE chantiers SET name = ?2, location = ?3 WHERE chantier_id = ?1", [id, name, location]);
+}
+
+export async function getChantier(id) {
+  const db = await connect();
+  const row = await db.select("SELECT * FROM chantiers WHERE chantier_id = ?1", [id]);
+  return row;
 }
