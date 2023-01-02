@@ -19,7 +19,9 @@
           <td>{{ worker.phone_number }}</td>
           <td>{{ worker.location }}</td>
           <td>{{ worker.position }}</td>
-          <td><button @click="editWorker(index)">edit</button></td>
+          <td>
+            <WorkerEdit :worker_id="worker.id"/>
+          </td>
           <td>
             <WorkerView :worker_id="worker.id"/>
           </td>
@@ -27,70 +29,19 @@
       </tbody>
     </table>
 
-    <form class="form" action="" @submit="updateWorker" v-if="modal.show">
-      <h1>Edit {{ this.modal.original_name }} Chantier</h1>
-      <input type="text" placeholder="Nom" v-model="modal.name" required> <br>
-      <input type="text" placeholder="birthday" v-model="modal.birthday" required> <br>
-      <input type="text" placeholder="Phone Number" v-model="modal.phone_number" required> <br>
-      <input type="text" placeholder="location" v-model="modal.location" required> <br>
-      <input type="text" placeholder="position" v-model="modal.position" required> <br>
-      <button>Update</button>
-    </form>
-
   </div>
 </template>
 
 <script>
-import { updateWorker as updateWr } from '../../functions/db';
 import WorkerView from './view.vue';
+import WorkerEdit from './edit.vue';
 
 export default {
-  methods: {
-    updateWorker () { 
-      updateWr(
-        this.modal.worker_id,
-        this.modal.name,
-        this.modal.birthday,
-        this.modal.phone_number,
-        this.modal.position,
-        this.modal.location,
-      );
-      this.modal.show = false;
-
-    },
-    editWorker (index) { 
-      this.modal.show = true;
-      this.modal.worker_id = this.workers[index].id;
-      this.modal.original_name = this.workers[index].name;
-      this.modal.name = this.workers[index].name;
-      this.modal.birthday = this.workers[index].birthday;
-      this.modal.phone_number = this.workers[index].phone_number;
-      this.modal.location = this.workers[index].location;
-      this.modal.position = this.workers[index].position;
-    },
-    
-  },
-  data () {
-    return {
-      modal: {
-        show: false,
-        worker_id: '',
-        original_name: '',
-        name: '',
-        birthday: '',
-        phone_number: '',
-        location: '',
-        position: '',
-        created_at: ''
-      }
-    }
-  },
-
-  
   name: 'WorkerTable',
   props: ['workers'],
   components: {
     WorkerView,
+    WorkerEdit
   }
 
 }
