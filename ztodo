@@ -1,0 +1,22 @@
+---- Chantier side  ----
+[x] list all chaniters
+[x] add chantier
+[x] edit chantier
+[x] view chantier
+
+
+---- Workers side  ----
+[x] list all workers
+[x] add worker
+[x] edit worker
+[x] view worker
+[] add worker to chantier
+
+
+---- global stuffs ----
+[] regroups chantier functions in one page
+[] regroups workers functions in one page
+[] page where u can enter stats of today, 
+  [] create today db
+  [] list workers of this chantier
+  [] register daily payment, and hourly worked for earch worker

@@ -16,7 +16,7 @@
           <td>{{ chantier.location }}</td>
           <td>{{ chantier.created_at }}</td>
           <td><button @click="editChantier(index)">edit</button></td>
-          <td><button @click="viewChantier(chantier.chantier_id)">stats</button></td>
+          <td><button @click="viewChantier(chantier.id)">stats</button></td>
         </tr>
       </tbody>
     </table>
@@ -46,12 +46,14 @@ import { updateChantier as updateCh, getChantier } from '../../functions/db';
 export default {
   methods: {
     updateChantier (e) { 
+      e.preventDefault();
+
       updateCh(this.modal.chantier_id, this.modal.name, this.modal.location);
       this.modal.show = false;
     },
     editChantier (index) { 
       this.modal.show = true;
-      this.modal.chantier_id = this.chantiers[index].chantier_id;
+      this.modal.chantier_id = this.chantiers[index].id;
       this.modal.original_name = this.chantiers[index].name;
       this.modal.name = this.chantiers[index].name;
       this.modal.location = this.chantiers[index].location;

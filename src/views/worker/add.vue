@@ -43,7 +43,7 @@ export default {
 
       setTimeout(() => {
         this.added_success = false;
-        document.location.reload(true);
+        //document.location.reload(true);
       }, 1000);
     },
   },

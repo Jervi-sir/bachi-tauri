@@ -11,51 +11,56 @@ export async function createTables() {
   const db = await connect();
   await db.execute(`
     CREATE TABLE IF NOT EXISTS chantiers (
-      chantier_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT,
       location TEXT,
       created_at DATE
     ); 
     CREATE TABLE IF NOT EXISTS workers (
-      worker_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT, 
       birthday DATE,
       phone_number TEXT,
       position TEXT,
       location TEXT,
-      chantier_id INTEGER,
-      created_at DATE,
-      FOREIGN KEY(chantier_id) REFERENCES chantiers(chantier_id)
+      created_at DATE
     );  
     CREATE TABLE IF NOT EXISTS worker_chantiers(
-      worker_chantier_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       worker_id INTEGER,
       chantier_id INTEGER,
       created_at DATE,
-      FOREIGN KEY(chantier_id) REFERENCES workers(worker_id),
-      FOREIGN KEY(worker_id) REFERENCES chantiers(chantier_id)
+      FOREIGN KEY(worker_id) REFERENCES workers(id),
+      FOREIGN KEY(chantier_id) REFERENCES chantiers(id)
     );
+
     CREATE TABLE IF NOT EXISTS todays(
-      today_id INTEGER PRIMARY KEY AUTOINCREMENT,
-      chantier_id TEXT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      created_at DATE
+    );
+    CREATE TABLE IF NOT EXISTS today_chantiers(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      today_id INTEGER,
+      chantier_id INTEGER,
       today_date DATE,
       total_invested TEXT,
       total_spent TEXT,
       created_at DATE,
-      FOREIGN KEY(today_id) REFERENCES chantiers(chantier_id)
+      FOREIGN KEY(today_id) REFERENCES todays(id),
+      FOREIGN KEY(chantier_id) REFERENCES chantiers(id)
     );
     CREATE TABLE IF NOT EXISTS today_works (
-      today_work_id INTEGER PRIMARY KEY AUTOINCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       worker_id INTEGER,
       chantier_id INTEGER,
-      today_id INTEGER,
+      today_chantier_id INTEGER,
       is_absent BOOL,
       revenue TEXT,
       hour_worked TEXT,
       created_at DATE,
-      FOREIGN KEY(chantier_id) REFERENCES chantiers(chantier_id),
-      FOREIGN KEY(worker_id) REFERENCES workers(worker_id),
-      FOREIGN KEY(today_id) REFERENCES todays(today_id)
+      FOREIGN KEY(worker_id) REFERENCES workers(id),
+      FOREIGN KEY(chantier_id) REFERENCES chantiers(id),
+      FOREIGN KEY(today_chantier_id) REFERENCES today_chantiers(id)
     );
   `)
 }
@@ -67,7 +72,7 @@ export async function createTables() {
 export async function insertWorker(name, birthday, phone_number, position, location) {
   const db = await connect();
   let today = new Date().toLocaleDateString()
-  await db.execute("INSERT INTO workers ('name', 'birthday', 'phone_number', 'position', 'location', 'created_at') VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)", 
+  await db.execute("INSERT INTO workers ('name', 'birthday', 'phone_number', 'position', 'location', 'created_at') VALUES (?1, ?2, ?3, ?4, ?5, ?6)", 
       [name, birthday, phone_number, position, location, today]
     );
 }
@@ -80,14 +85,14 @@ export async function allWorkers() {
 
 export async function updateWorker(id, name, birthday, phone_number, position, location) {
   const db = await connect();
-  await db.execute("UPDATE workers SET name = ?2, birthday = ?3, phone_number = ?4, position = ?5, location = ?6 WHERE worker_id = ?1", 
+  await db.execute("UPDATE workers SET name = ?2, birthday = ?3, phone_number = ?4, position = ?5, location = ?6 WHERE id = ?1", 
     [id, name, birthday, phone_number, position, location]
   );
 }
 
 export async function getWorker(id) {
   const db = await connect();
-  const row = await db.select("SELECT * FROM workers WHERE worker_id = ?1", [id]);
+  const row = await db.select("SELECT * FROM workers WHERE id = ?1", [id]);
   return row;
 }
 
@@ -111,11 +116,11 @@ export async function allChantier() {
 
 export async function updateChantier(id, name, location) {
   const db = await connect();
-  await db.execute("UPDATE chantiers SET name = ?2, location = ?3 WHERE chantier_id = ?1", [id, name, location]);
+  await db.execute("UPDATE chantiers SET name = ?2, location = ?3 WHERE id = ?1", [id, name, location]);
 }
 
 export async function getChantier(id) {
   const db = await connect();
-  const row = await db.select("SELECT * FROM chantiers WHERE chantier_id = ?1", [id]);
+  const row = await db.select("SELECT * FROM chantiers WHERE id = ?1", [id]);
   return row;
 }

@@ -20,7 +20,7 @@
           <td>{{ worker.location }}</td>
           <td>{{ worker.position }}</td>
           <td><button @click="editWorker(index)">edit</button></td>
-          <td><button @click="viewWorker(worker.worker_id)">stats</button></td>
+          <td><button @click="viewWorker(worker.id)">stats</button></td>
         </tr>
       </tbody>
     </table>
@@ -67,7 +67,7 @@ export default {
     },
     editWorker (index) { 
       this.modal.show = true;
-      this.modal.worker_id = this.workers[index].worker_id;
+      this.modal.worker_id = this.workers[index].id;
       this.modal.original_name = this.workers[index].name;
       this.modal.name = this.workers[index].name;
       this.modal.birthday = this.workers[index].birthday;
