@@ -28,9 +28,6 @@ export default {
     ChantierTable
   }
 }
-
-console.log();
-
 </script>
 
 <style lang="scss" scoped>

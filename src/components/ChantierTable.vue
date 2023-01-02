@@ -5,20 +5,55 @@
         <tr>
           <th data-pos-left="data-pos-left">Nom</th>
           <th>Absence</th>
+          <th>edit</th>
         </tr>
       </thead>
       <tbody class="compar-table_zebra">
-        <tr class="chantier" v-for="chantier in chantiers" v-bind:key="chantier.chantier_id">
+        <tr class="chantier" v-for="(chantier, index) in chantiers" v-bind:key="index">
           <td>{{ chantier.name }}</td>
           <td>{{ chantier.location }}</td>
+          <td><button @click="editChantier(index)">edit</button></td>
         </tr>
       </tbody>
     </table>
+
+    <form class="form" action="" @submit="updateChantier" v-if="modal.show">
+      <h1>Edit {{ modal.original_name }} Chantier</h1>
+      <input type="text" placeholder="Nom" v-model="modal.name" required>
+      <input type="text" placeholder="location" v-model="modal.location" required>
+      <button>Update</button>
+    </form>
   </div>
 </template>
 
 <script>
+import { updateChantier as updateCh } from '../functions/db';
+
 export default {
+  methods: {
+    updateChantier (e) { 
+      updateCh(this.modal.chantier_id, this.modal.name, this.modal.location);
+      this.modal.show = false;
+    },
+    editChantier (index) { 
+      this.modal.show = true;
+      this.modal.chantier_id = this.chantiers[index].chantier_id;
+      this.modal.original_name = this.chantiers[index].name;
+      this.modal.name = this.chantiers[index].name;
+      this.modal.location = this.chantiers[index].location;
+    },
+  },
+  data () {
+    return {
+      modal: {
+        show: false,
+        chantier_id: '',
+        original_name: '',
+        name: '',
+        location: ''
+      }
+    }
+  },
   name: 'ChantierTable',
   props: ['chantiers']
 }

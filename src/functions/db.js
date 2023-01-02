@@ -70,3 +70,7 @@ export async function allChantier() {
   return rows;
 }
 
+export async function updateChantier(id, name, location) {
+  const db = await connect();
+  await db.execute("UPDATE chantiers SET name = ?2, location = ?3 WHERE chantier_id = ?1", [id, name, location]);
+}
