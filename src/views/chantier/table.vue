@@ -22,14 +22,14 @@
     </table>
 
     <form class="form" action="" @submit="updateChantier" v-if="modal.show">
-      <h1>Edit {{ modal.original_name }} Chantier</h1>
+      <h1>Edit {{ this.modal.original_name }} Chantier</h1>
       <input type="text" placeholder="Nom" v-model="modal.name" required>
       <input type="text" placeholder="location" v-model="modal.location" required>
       <button>Update</button>
     </form>
 
     <div class="form" v-if="stats.show">
-      <h1>Show {{ modal.original_name }} Chantier</h1>
+      <h1>Show {{ this.stats.name }} Chantier</h1>
       <label for="">name:</label><span>{{ this.stats.name }}</span> <br>
       <label for="">location:</label><span>{{ this.stats.location }}</span> <br>
       <label for="">nb_worker:</label><span>{{ this.stats.nb_worker }}</span> <br>
