@@ -1,8 +1,7 @@
 <template>
   <header>
     <router-link to="/"><img src="./assets/images/home.svg" alt=""></router-link>
-    <router-link to="/all_users"><img src="./assets/images/user.svg" alt=""></router-link>
-    <router-link to="/add_worker"><img src="./assets/images/add.svg" alt=""></router-link>
+    <router-link to="/worker"><img src="./assets/images/user.svg" alt=""></router-link>
     <router-link to="/chantier"><img src="./assets/images/add.svg" alt=""></router-link>
     <router-link to="/stats"><img src="./assets/images/stats.svg" alt=""></router-link>
   </header>

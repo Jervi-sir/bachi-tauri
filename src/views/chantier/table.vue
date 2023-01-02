@@ -29,7 +29,7 @@
     </form>
 
     <div class="form" v-if="stats.show">
-      <h1>Edit {{ modal.original_name }} Chantier</h1>
+      <h1>Show {{ modal.original_name }} Chantier</h1>
       <label for="">name:</label><span>{{ this.stats.name }}</span> <br>
       <label for="">location:</label><span>{{ this.stats.location }}</span> <br>
       <label for="">nb_worker:</label><span>{{ this.stats.nb_worker }}</span> <br>
@@ -44,8 +44,6 @@
 import { updateChantier as updateCh, getChantier } from '../../functions/db';
 
 export default {
-  props: {
-  },
   methods: {
     updateChantier (e) { 
       updateCh(this.modal.chantier_id, this.modal.name, this.modal.location);

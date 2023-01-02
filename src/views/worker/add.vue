@@ -1,6 +1,7 @@
 <template>
   <div class="about">
     <TodayDate />
+    <WorkerRoutes />
     <form class="form" @submit="addWorker">
       <h1>Ajouter un travailleur</h1>
       <input type="text" v-model="name" placeholder="Nom">
@@ -15,8 +16,9 @@
 
 <script>
 // @ is an alias to /src
-import TodayDate from '../components/TodayDate.vue';
-import { insertWorker } from '../functions/db';
+import TodayDate from '../../components/TodayDate.vue';
+import { insertWorker } from '../../functions/db';
+import WorkerRoutes from './routes.vue';
 
 export default {
   data () {
@@ -47,7 +49,8 @@ export default {
   },
   name: 'AddWorker',
   components: {
-    TodayDate
+    TodayDate,
+    WorkerRoutes
   }
 }
 </script>

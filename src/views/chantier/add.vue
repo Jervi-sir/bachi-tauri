@@ -18,6 +18,8 @@ import { insertChantier } from '../../functions/db';
 import ChantierRoutes from './routes.vue';
 
 export default {
+  props: {
+  },
   watch: {
   },
   data () {
@@ -28,7 +30,7 @@ export default {
     }
   },
   methods: {
-    addChantier (e) { 
+    addChantier(e) { 
       e.preventDefault();
       insertChantier(this.name, this.location);
       this.added_success = true;
