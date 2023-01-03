@@ -15,7 +15,9 @@
           <td>{{ chantier.name }}</td>
           <td>{{ chantier.location }}</td>
           <td>{{ chantier.created_at }}</td>
-          <td><button @click="editChantier(index)">edit</button></td>
+          <td>
+            <ChantierEdit :chantier_id="chantier.id" />
+          </td>
           <td>
             <ChantierView :chantier_id="chantier.id" />
           </td>
@@ -23,50 +25,22 @@
       </tbody>
     </table>
 
-    <form class="form" action="" @submit="updateChantier" v-if="modal.show">
-      <h1>Edit {{ this.modal.original_name }} Chantier</h1>
-      <input type="text" placeholder="Nom" v-model="modal.name" required>
-      <input type="text" placeholder="location" v-model="modal.location" required>
-      <button>Update</button>
-    </form>
+    
   </div>
 </template>
 
 <script>
-import { updateChantier as updateCh } from '../../functions/db';
 import ChantierView from './view.vue';
+import ChantierEdit from './edit.vue';
 
 export default {
   methods: {
-    updateChantier (e) { 
-      e.preventDefault();
-
-      updateCh(this.modal.chantier_id, this.modal.name, this.modal.location);
-      this.modal.show = false;
-    },
-    editChantier (index) { 
-      this.modal.show = true;
-      this.modal.chantier_id = this.chantiers[index].id;
-      this.modal.original_name = this.chantiers[index].name;
-      this.modal.name = this.chantiers[index].name;
-      this.modal.location = this.chantiers[index].location;
-    }
-  },
-  data () {
-    return {
-      modal: {
-        show: false,
-        chantier_id: '',
-        original_name: '',
-        name: '',
-        location: ''
-      }
-    }
   },
   name: 'ChantierTable',
   props: ['chantiers'],
   components: {
     ChantierView,
+    ChantierEdit
   }
 }
 </script>
