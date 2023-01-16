@@ -1,9 +1,10 @@
-import SQLite from 'tauri-plugin-sqlite-api'
+//import SQLite from 'tauri-plugin-sqlite-api'
 import { documentDir } from '@tauri-apps/api/path';
 const documentDirPath = await documentDir();
+import Database from "tauri-plugin-sql-api";
 
 async function connect() {
-  const db = await SQLite.open(documentDirPath + '/test.db')
+  const db = await Database.load('sqlite:' + documentDirPath + '/test.db')
   return db;
 }
 
@@ -153,10 +154,10 @@ export async function getTodayWorkOfChantier(chantier_id) {
                                     [today, chantier_id])
   if(today_chantier.length == 0) {  //doesn't exist
     //create today_chantier
-    today_chantier = await db.execute("INSERT INTO today_chantiers (chantier_id, today_date, created_at) VALUES (?1, ?2, ?3); SELECT @@IDENTITY",
+    today_chantier = await db.execute("INSERT INTO today_chantiers (chantier_id, today_date, created_at) VALUES (?1, ?2, ?3)",
                                     [chantier_id, today, today]);
   } else { //does exist 
-
+    
   }
   console.log(today_chantier);
   //search in today_chantier if exists, if doesnt, then create new one
