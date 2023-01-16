@@ -1,6 +1,10 @@
 <template>
   <div class="body">
     <TodayDate />
+    
+    <div v-for="chantier in chantiers" :key="chantier.id">
+      <button @click="selectChantier(chantier.id)">{{ chantier.name }}</button>
+    </div>
     <div class="content">
       <div class="left">
         <div class="top">
@@ -10,7 +14,7 @@
           </div>
           <div class="search-name">
             <input type="text" placeholder="Nom">
-            <button><img src="../assets/images/search.svg" alt=""></button>
+            <button><img src="../../assets/images/search.svg" alt=""></button>
           </div>
         </div>
         <UserTable />
@@ -25,13 +29,28 @@
 
 <script>
 // @ is an alias to /src
-import TodayDate from '../components/TodayDate.vue';
-import UserTable from '../components/UserTable.vue';
-import TodayStats from '../components/TodayStats.vue';
-import { createTables } from '../functions/db';
+import TodayDate from '../../components/TodayDate.vue';
+import UserTable from '../../components/UserTable.vue';
+import TodayStats from '../../components/TodayStats.vue';
+import { createTables, listChantier, getTodayWorkOfChantier } from '../../functions/db';
+
 
 export default {
+  data () {
+    return {
+      chantiers: [],  //id, name
+      workers: [],  //id, name
+    }
+  },
+  async created () {
+    this.chantiers= await listChantier();
+    await getTodayWorkOfChantier(1);
+  },
   methods: {
+    async selectChantier (id) { 
+      console.log(id)
+      return null 
+    },
   },
   name: 'HomeView',
   components: {

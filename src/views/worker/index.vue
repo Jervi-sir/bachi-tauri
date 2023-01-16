@@ -1,6 +1,7 @@
 <template>
   <div class="body">
     <TodayDate />
+    <h1>create worker</h1>
     <WorkerRoutes />
     <SuccessMessage :isActive="added_success"/>
     <WorkerTable :workers="allWorkers" />

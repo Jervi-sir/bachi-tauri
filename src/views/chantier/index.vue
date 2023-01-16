@@ -1,6 +1,7 @@
 <template>
   <div class="body">
     <TodayDate />
+    <h1>create chantier</h1>
     <ChantierRoutes />
     <SuccessMessage :isActive="added_success"/>
     <ChantierTable :chantiers="allChantiers"/>

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Home from '../views/home/index.vue'
 import Chantier from '../views/chantier/index.vue'
 import AddChantier from '../views/chantier/add.vue'
 import Workers from '../views/worker/index.vue'
@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: Home
   },
   {
     path: '/worker',
