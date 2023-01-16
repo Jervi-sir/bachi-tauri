@@ -5,38 +5,27 @@
         <tr>
           <th data-pos-left="data-pos-left">Nom</th>
           <th>Absence</th>
-          <th>Paiment</th>
+          <th>phone number</th>
+          <th>location</th>
+          <th>position</th>
+          <th>hours Worked</th>
+          <th>Payment</th>
+          <th>edit/save</th>
         </tr>
       </thead>
       <tbody class="compar-table_zebra">
-        <tr class="user">
-          <td>Name 1 Prename 2</td>
+        <tr class="user" v-for="worker in workers" :key="worker.id">
+          <td>{{ worker.name }}</td>
           <td data-pos-center="data-pos-center">
-            <input type="checkbox">
+            <input type="checkbox" :checked="worker.is_absent != 0">
           </td>
-          <td data-pos-center="data-pos-center">
-            <input type="text" placeholder="000 Da">
-          </td>
-        </tr>
-        <tr class="user">
-          <td>Name 1 Prename 2</td>
-          <td data-pos-center="data-pos-center">
-            <input type="checkbox">
-          </td>
-          <td data-pos-center="data-pos-center">
-            <input type="text" placeholder="000 Da">
-          </td>
-        </tr>
-        <tr class="user">
-          <td>Name 1 Prename 2</td>
-          <td data-pos-center="data-pos-center">
-            <input type="checkbox">
-          </td>
-          <td data-pos-center="data-pos-center">
-            <input type="text" placeholder="000 Da">
-          </td>
-        </tr>
-        
+          <td><span>{{ worker.phone_number }}</span></td>
+          <td><span>{{ worker.location }}</span></td>
+          <td><span>{{ worker.position }}</span></td>
+          <td><input type="number" placeholder="000 Da" :value="worker.hour_worked"></td>
+          <td><input type="text" placeholder="000 Da" :value="worker.revenue"></td>
+          <td><button>edit</button></td>
+        </tr>     
       </tbody>
     </table>
   </div>
@@ -45,9 +34,7 @@
 <script>
 export default {
   name: 'UserTable',
-  props: {
-    
-  }
+  props: ['workers', 'chantier_id'],
 }
 </script>
 

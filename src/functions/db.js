@@ -1,4 +1,3 @@
-//import SQLite from 'tauri-plugin-sqlite-api'
 import { documentDir } from '@tauri-apps/api/path';
 const documentDirPath = await documentDir();
 import Database from "tauri-plugin-sql-api";
@@ -145,28 +144,20 @@ export async function addWorkerToChantier(worker_id, chantier_id) {
  |-----------------------
 */
 export async function getTodayWorkOfChantier(chantier_id) {
-  var chantier_id = 2;
   const db = await connect();
 
   //get today date formatted
   let today = new Date().toLocaleDateString();  // MM/DD/YYYY
   let today_chantier = await db.select("SELECT * FROM today_chantiers WHERE chantier_id = ?2 AND today_date = ?1", 
                                     [today, chantier_id])
-  if(today_chantier.length == 0) {  //doesn't exist
+  //search in today_chantier if exists, if doesnt, then create new one
+  if(today_chantier.length == 0) {  
     //create today_chantier
     today_chantier = await db.execute("INSERT INTO today_chantiers (chantier_id, today_date, created_at) VALUES (?1, ?2, ?3)",
                                     [chantier_id, today, today]);
-  } else { //does exist 
-    
-  }
-  console.log(today_chantier);
-  //search in today_chantier if exists, if doesnt, then create new one
-  //list workers for that chantier
-  //join with today_work if the today_chantier was already existing
+  } 
+  //list workers for that chantier joined with today_work 
+  let workers_chantier = await db.select("SELECT w.*, tw.* FROM chantiers c JOIN worker_chantiers wc ON c.id = wc.chantier_id JOIN workers w ON wc.worker_id = w.id JOIN today_works tw ON tw.worker_id = w.id WHERE wc.chantier_id = ?1 AND tw.chantier_id = ?1", [chantier_id])
+  
+  return workers_chantier;
 }
-
-
-/*--
-make function that create today's work for each chantier and current day
-
--*/

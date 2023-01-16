@@ -17,7 +17,7 @@
             <button><img src="../../assets/images/search.svg" alt=""></button>
           </div>
         </div>
-        <UserTable />
+        <UserTable :workers="workers" :chantier_id="selected_chantier_id"/>
       </div>
       <div class="right">
         <TodayStats />
@@ -38,17 +38,19 @@ import { createTables, listChantier, getTodayWorkOfChantier } from '../../functi
 export default {
   data () {
     return {
+      selected_chantier_id: '',
       chantiers: [],  //id, name
       workers: [],  //id, name
     }
   },
   async created () {
     this.chantiers= await listChantier();
-    await getTodayWorkOfChantier(1);
+    
   },
   methods: {
     async selectChantier (id) { 
-      console.log(id)
+      this.selected_chantier_id = id;
+      this.workers = await getTodayWorkOfChantier(id);
       return null 
     },
   },
