@@ -159,5 +159,8 @@ export async function getTodayWorkOfChantier(chantier_id) {
   //list workers for that chantier joined with today_work 
   let workers_chantier = await db.select("SELECT w.*, tw.* FROM chantiers c JOIN worker_chantiers wc ON c.id = wc.chantier_id JOIN workers w ON wc.worker_id = w.id JOIN today_works tw ON tw.worker_id = w.id WHERE wc.chantier_id = ?1 AND tw.chantier_id = ?1", [chantier_id])
   
-  return workers_chantier;
+  return {
+    'chantier': today_chantier,
+    'workers': workers_chantier
+  }
 }

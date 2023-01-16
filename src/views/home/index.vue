@@ -20,7 +20,7 @@
         <UserTable :workers="workers" :chantier_id="selected_chantier_id"/>
       </div>
       <div class="right">
-        <TodayStats />
+        <TodayStats :nb_workers="workers.length" :status="chantier_status" />
       </div>
     </div>
 
@@ -41,6 +41,7 @@ export default {
       selected_chantier_id: '',
       chantiers: [],  //id, name
       workers: [],  //id, name
+      chantier_status: [],
     }
   },
   async created () {
@@ -50,7 +51,10 @@ export default {
   methods: {
     async selectChantier (id) { 
       this.selected_chantier_id = id;
-      this.workers = await getTodayWorkOfChantier(id);
+      let serverResponse = await getTodayWorkOfChantier(id);
+      this.workers = serverResponse['workers'];
+      this.chantier_status = serverResponse['chantier'][0];
+      console.log(this.chantier_status[0]);
       return null 
     },
   },
@@ -68,7 +72,6 @@ createTables();
 
 <style lang="scss" scoped>
   .body {
-    flex: auto;
     .content {
       display: flex;
       justify-content: space-between;
@@ -76,7 +79,9 @@ createTables();
       gap: 4rem;
     }
     .left {
-      width: 80%;
+      min-width: 70%;
+      max-width: 70%;
+      width: 70%;
       .top {
         display: flex;
         justify-content: space-between;

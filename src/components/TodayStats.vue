@@ -7,19 +7,19 @@
     <h1>Statistiques</h1>
     <div class="paied-today">
       <label for="">Payment Aujourd’hui:</label>
-      <span>20,000.00 DA</span>
+      <span>{{ status.total_invested }}</span>
     </div>
     <div class="paied-total">
       <label for="">total payee:</label>
-      <span>15,000.00 DA</span>
+      <span>{{ status.total_spent }}</span>
     </div>
     <div class="amount-worker">
       <label for="">travailleurs</label>
-      <span>15</span>
+      <span>{{ nb_workers }}</span>
     </div>
     <div class="paied-lefts">
       <label for="">payment restant</label>
-      <span>5,000.00 DA</span>
+      <span>{{ status.total_invested - status.total_spent }}</span>
     </div>
   </div>
 </template>
@@ -27,9 +27,7 @@
 <script>
 export default {
   name: 'TodayStats',
-  props: {
-    
-  }
+  props: ['status', 'nb_workers']
 }
 </script>
 

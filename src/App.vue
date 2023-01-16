@@ -34,4 +34,16 @@ header {
   }
 }
 
+.body {
+  max-width: 80vw;
+  width: 80vw;
+}
+::-webkit-scrollbar{
+  width:2px; 
+  height:2px;
+  border-left:1px solid #E6ECF8;
+}
+::-webkit-scrollbar-thumb{
+  background-color:#4d4d4d;
+}
 </style>
