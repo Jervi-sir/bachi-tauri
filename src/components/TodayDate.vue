@@ -8,6 +8,21 @@
 
 <script>
 export default {
+  methods: {
+    clock() {
+      this.time = Intl.DateTimeFormat('fr-FR', {
+        hour: 'numeric',
+        minute: 'numeric'
+      }).format()
+      this.date = Intl.DateTimeFormat('fr-FR', {
+          day: '2-digit',
+          month: 'long'
+      }).format()
+      this.second = ("0" + Intl.DateTimeFormat('fr-FR', {
+          second: 'numeric'
+      }).format()).slice(-2);
+    }
+  },
   
   name: 'TodayDate',
   data() {
@@ -23,19 +38,10 @@ export default {
     clearInterval(this.interval)
   },
   created() {
+    this.clock();
     // update the time every second
     this.interval = setInterval(() => {
-      this.time = Intl.DateTimeFormat('fr-FR', {
-        hour: 'numeric',
-        minute: 'numeric'
-      }).format()
-      this.date = Intl.DateTimeFormat('fr-FR', {
-        day: '2-digit',
-        month: 'long'
-      }).format()
-      this.second = ("0" + Intl.DateTimeFormat('fr-FR', {
-        second: 'numeric'
-      }).format()).slice(-2);
+      this.clock();
     }, 1000)
   }
 }
