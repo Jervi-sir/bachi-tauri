@@ -1,28 +1,43 @@
 <template>
   <button @click="viewChantier(chantier_id)">stats</button>
+  <div class="bg" v-if="show" @click="show = false"></div>
   <div class="form" v-if="show">
-      <h1>Show {{ this.name }} Chantier</h1>
-      <label for="">name:</label><span>{{ this.name }}</span> <br>
-      <label for="">location:</label><span>{{ this.location }}</span> <br>
-      <label for="">nb_worker:</label><span>{{ this.nb_worker }}</span> <br>
-      <label for="">total_spent:</label><span>{{ this.total_spent }}</span> <br>
-      <label for="">created_at:</label><span>{{ this.created_at }}</span> <br>
+      <h1>Show  <u>{{ this.name }}</u> Chantier</h1>
+      <div class="row">
+        <label for="">name:</label><span>{{ this.name }}</span> 
+      </div>
+      <div class="row">
+        <label for="">location:</label><span>{{ this.location }}</span> 
+      </div>
+      <div class="row">
+        <label for="">nb_worker:</label><span>{{ this.nb_worker }}</span> 
+      </div>
+      <div class="row">
+        <label for="">total_spent:</label><span>{{ this.total_spent }}</span> 
+      </div>
+      <div class="row">
+        <label for="">created_at:</label><span>{{ this.created_at }}</span> 
+      </div>
     </div>
 </template>
 
 <script>
-import { getChantier } from '../../functions/db';
+import { getChantier, getTotalInvestChantier, getNbWorkersChantier } from '../../functions/db';
 
 export default {
   methods: {
     async viewChantier(id) {
       const chantierDB = await getChantier(id);
+      const money = await getTotalInvestChantier(id);
+      const nbWorker = await getNbWorkersChantier(id);
       this.show = true;
       this.name = chantierDB[0].name;
       this.location = chantierDB[0].location;
       this.created_at = chantierDB[0].created_at;
-      this.nb_worker = chantierDB[0].name;
-      this.total_spent = chantierDB[0].name;
+      this.nb_worker = nbWorker || 0;
+      this.total_spent = money.total_spent || 0;
+      this.total_invested = money.total_invested || 0;
+
     }
   },
   data () {
@@ -43,8 +58,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form {
+.bg {
+  width: 100vw;
+  height: 100vh;
   position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(1px);
+}
+.form {
+  z-index: 99;
+  width: 300px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px, rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+  border-radius: 10px;
   background: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  h1 {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+  label {
+    font-weight: 800;
+    margin-right: 7px;
+  }
+  
 }
 </style>

@@ -7,19 +7,19 @@
     <h1>Statistiques</h1>
     <div class="paied-today">
       <label for="">Payment Aujourd’hui:</label>
-      <span>{{ status.total_invested }}</span>
+      <span>{{ status.total_invested || 0 }}</span>
     </div>
     <div class="paied-total">
       <label for="">total payee:</label>
-      <span>{{ status.total_spent }}</span>
+      <span>{{ status.total_spent || 0 }}</span>
     </div>
     <div class="amount-worker">
       <label for="">travailleurs</label>
-      <span>{{ nb_workers }}</span>
+      <span>{{ nb_workers || 0 }}</span>
     </div>
     <div class="paied-lefts">
       <label for="">payment restant</label>
-      <span>{{ status.total_invested - status.total_spent }}</span>
+      <span>{{ (status.total_invested - status.total_spent) || 0 }}</span>
     </div>
   </div>
 </template>

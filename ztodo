@@ -20,3 +20,24 @@
   [] create today db
   [] list workers of this chantier
   [] register daily payment, and hourly worked for earch worker
+
+
+---- TODO URGENT -----
+[] style chantier list in home page
+[] style option of table in home page
+[] make total today functional
+  [] add button of save
+[] make each worker edit income functional
+  [] add button of save or edit
+[] update total spent in the statistic also in Database
+[] list all workers styling
+[] style list all chantier
+[] add to add workers in chantier
+[] remove worker
+[] disable chantier
+
+[x] list workers button on each Chantier
+[x] add worker in chantier
+[x] delete worker from chantier
+[x] modal for edit and stats of each worker
+[x] modal for edit and stats of each chantier

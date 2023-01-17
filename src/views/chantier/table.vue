@@ -8,6 +8,7 @@
           <th>date</th>
           <th>edit</th>
           <th>view</th>
+          <th>workers</th>
         </tr>
       </thead>
       <tbody class="compar-table_zebra">
@@ -21,6 +22,9 @@
           <td>
             <ChantierView :chantier_id="chantier.id" />
           </td>
+          <td>
+            <WorkerView :chantier_id="chantier.id" />
+          </td>
         </tr>
       </tbody>
     </table>
@@ -32,15 +36,19 @@
 <script>
 import ChantierView from './view.vue';
 import ChantierEdit from './edit.vue';
+import WorkerView from './workers.vue';
 
 export default {
+  created () {
+  },
   methods: {
   },
   name: 'ChantierTable',
   props: ['chantiers'],
   components: {
     ChantierView,
-    ChantierEdit
+    ChantierEdit,
+    WorkerView
   }
 }
 </script>

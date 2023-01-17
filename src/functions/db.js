@@ -115,6 +115,7 @@ export async function updateChantier(id, name, location) {
 export async function getChantier(id) {
   const db = await connect();
   const row = await db.select("SELECT * FROM chantiers WHERE id = ?1", [id]);
+  console.log(row)
   return row;
 }
 
@@ -137,6 +138,43 @@ export async function addWorkerToChantier(worker_id, chantier_id) {
   await db.execute("INSERT INTO worker_chantiers ('worker_id', 'chantier_id', 'created_at') VALUES (?1, ?2, ?3)", [worker_id, chantier_id, today]);
 }
 
+export async function getTotalInvestChantier(chantier_id) {
+  const db = await connect();
+  let rows = await db.select("SELECT total_invested, total_spent FROM today_chantiers WHERE chantier_id = ?1", [chantier_id]);
+  
+  if(rows.length != 0) {
+    var total_invested = rows.map(row => row.total_invested).reduce((acc, row) => row + acc);
+    var total_spent = rows.map(row => row.total_spent).reduce((acc, row) => row + acc);
+  } else {
+    var total_invested = 0;
+    var total_spent = 0;
+  }
+  return {
+    'total_invested': total_invested,
+    'total_spent': total_spent,
+  };
+}
+
+export async function getNbWorkersChantier(chantier_id) {
+  const db = await connect();
+  let rows = await db.select("SELECT * FROM worker_chantiers WHERE chantier_id = ?1", [chantier_id]);
+  return rows.length;
+}
+
+export async function get_joinedWorkers_and_notJoinedWorkers(chantier_id) {
+  const db = await connect();
+  let joinedWorkers = await db.select("SELECT * FROM workers w JOIN worker_chantiers wc ON wc.worker_id = w.id  WHERE wc.chantier_id = ?1", [chantier_id]);
+  let notJoined = await db.select("SELECT * FROM workers joined WHERE id NOT IN (SELECT w.id FROM workers w JOIN worker_chantiers wc ON wc.worker_id = w.id  WHERE wc.chantier_id = ?1)", [chantier_id]);
+  return {
+    'joined': joinedWorkers,
+    'notJoined': notJoined,
+  };
+}
+
+export async function excludeWorkerFromChantier(deal_id) {
+  const db = await connect();
+  await db.execute("DELETE FROM worker_chantiers WHERE id = ?1", [deal_id]);
+}
 
 /*
  |-----------------------
