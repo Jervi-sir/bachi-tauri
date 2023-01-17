@@ -1,8 +1,6 @@
 <template>
   <div class="body">
-    <TodayDate />
-    <h1>create worker</h1>
-    <WorkerRoutes />
+    <Header :componentId="routes" title="Workers"/>
     <SuccessMessage :isActive="added_success"/>
     <WorkerTable :workers="allWorkers" />
   </div>
@@ -10,17 +8,17 @@
 
 <script>
 // @ is an alias to /src
-import TodayDate from '../../components/TodayDate.vue';
-import SuccessMessage from '../../components/SuccessMessage.vue';
 import { allWorkers } from '../../functions/db';
 import WorkerTable from './table.vue';
-import WorkerRoutes from './routes.vue';
+import Routes from './routes.vue';
+import Header from '../../components/Header.vue';
 
 export default {
   data () {
     return {
       allWorkers: [],
       added_success: false,
+      routes: Routes
     }
   },
   async created () {
@@ -30,10 +28,9 @@ export default {
   },
   name: 'Worker',
   components: {
-    TodayDate,
+    Header,
     WorkerTable,
-    WorkerRoutes,
-    SuccessMessage
+    Routes,
   }
 }
 </script>

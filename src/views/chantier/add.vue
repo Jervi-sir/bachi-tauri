@@ -1,7 +1,7 @@
 <template>
   <div class="body">
-    <TodayDate />
-    <ChantierRoutes />
+    <Header :componentId="routes" title="Chantier"/>
+
     <form class="form" @submit="addChantier">
       <h1>Ajouter un chantier</h1>
       <input type="text" placeholder="Nom" v-model="name" required>
@@ -15,7 +15,8 @@
 // @ is an alias to /src
 import TodayDate from '../../components/TodayDate.vue';
 import { insertChantier } from '../../functions/db';
-import ChantierRoutes from './routes.vue';
+import Routes from './routes.vue';
+import Header from '../../components/Header.vue';
 
 export default {
   props: {
@@ -26,7 +27,8 @@ export default {
     return {
       name: '',
       location: '',
-      added_success: false
+      added_success: false,
+      routes: Routes
     }
   },
   methods: {
@@ -47,7 +49,8 @@ export default {
   name: 'AddChantier',
   components: {
     TodayDate,
-    ChantierRoutes
+    Routes,
+    Header
   }
 }
 </script>

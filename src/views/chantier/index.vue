@@ -1,39 +1,36 @@
 <template>
   <div class="body">
-    <TodayDate />
-    <h1>create chantier</h1>
-    <ChantierRoutes />
-    <SuccessMessage :isActive="added_success"/>
+    <Header :componentId="routes" title="Chantier"/>
     <ChantierTable :chantiers="allChantiers"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import TodayDate from '../../components/TodayDate.vue';
 import ChantierTable from './table.vue';
-import ChantierRoutes from './routes.vue';
-import SuccessMessage from '../../components/SuccessMessage.vue';
 import { allChantier } from '../../functions/db';
+import Header from '../../components/Header.vue';
+import Routes from './routes.vue';
 
 export default {
+  watch: {
+  },
   data () {
     return {
       allChantiers: [],
       added_success: false,
+      routes: Routes
     }
   },
   async created () {
     this.allChantiers = await allChantier();
   },
-  methods: {
-  },
+  
   name: 'Chantier',
   components: {
-    TodayDate,
+    Header,
     ChantierTable,
-    ChantierRoutes,
-    SuccessMessage
+    Routes
   }
 }
 </script>
