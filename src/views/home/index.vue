@@ -57,7 +57,7 @@ export default {
       let serverResponse = await getTodayWorkOfChantier(id);
       this.workers = serverResponse['workers'];
       this.chantier_status = serverResponse['chantier'][0];
-      console.log(this.chantier_status);
+      //console.log(this.chantier_status);
       return null 
     },
   },

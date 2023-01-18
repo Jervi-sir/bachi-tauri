@@ -181,7 +181,45 @@ export async function excludeWorkerFromChantier(deal_id) {
  | Today and worker and chantier Section
  |-----------------------
 */
+
+/*-new-*/
 export async function getTodayWorkOfChantier(chantier_id) {
+  const db = await connect();
+
+  //get today date formatted
+  let today = new Date().toLocaleDateString();  // MM/DD/YYYY
+
+  //check if chantier stats of today was already created
+  let today_chantier = await db.select("SELECT * FROM today_chantiers WHERE chantier_id = ?2 AND today_date = ?1", 
+                                      [today, chantier_id])
+  let today_chantier_id = today_chantier[0].id;
+
+  //search in today_chantier if exists, if doesnt, then create new one
+  if(today_chantier.length == 0) {  
+    //create today_chantier
+    today_chantier = await db.execute("INSERT INTO today_chantiers (chantier_id, today_date, created_at) VALUES (?1, ?2, ?3)",
+                                    [chantier_id, today, today]);
+    today_chantier_id = today_chantier.lastInsertId;
+    //get worker ids of chantier
+    var worker_ids = await db.select("SELECT worker_id FROM worker_chantiers WHERE chantier_id = ?1", [chantier_id]);
+    //insert workers in today stats chantier aka today_works
+    for(var i = 0; i < worker_ids.length; i++) {
+      await db.execute("INSERT INTO today_works (worker_id, chantier_id, today_chantier_id, created_at) VALUES (?1, ?2, ?3, ?4)",
+                    [parseInt(worker_ids[i].worker_id), chantier_id, today_chantier_id, today]);
+    }
+  } 
+
+  //get list of today_works
+  var result_workers = await db.select("SELECT * FROM today_works tw  JOIN workers w ON w.id = tw.worker_id WHERE tw.chantier_id = ?1 AND tw.today_chantier_id = ?2", [chantier_id, today_chantier_id]);
+  return {
+    'chantier': today_chantier,
+    'workers': result_workers
+  }
+
+}
+
+/*-old-*/
+export async function getTodayWorkOfChantier_OLD(chantier_id) {
   const db = await connect();
 
   //get today date formatted
