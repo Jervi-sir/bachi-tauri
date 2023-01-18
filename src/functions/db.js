@@ -202,3 +202,8 @@ export async function getTodayWorkOfChantier(chantier_id) {
     'workers': workers_chantier
   }
 }
+
+export async function saveTodayWorkerWork(worker_id, chantier_id, is_absent, revenue, hour_worked) {
+  const db = await connect();
+  await db.execute("UPDATE today_works SET is_absent = ?1, revenue = ?2, hour_worker = ?3 WHERE id = ?4");
+}

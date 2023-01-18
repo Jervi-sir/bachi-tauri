@@ -1,9 +1,10 @@
 <template>
   <div class="body">
     <TodayDate />
-    
-    <div v-for="chantier in chantiers" :key="chantier.id">
-      <button @click="selectChantier(chantier.id)">{{ chantier.name }}</button>
+    <div class="chantier-list">
+      <div class="chantier"  v-for="chantier in chantiers" :key="chantier.id">
+        <button @click="selectChantier(chantier.id)" :class="{ 'active': selected == chantier.id }">{{ chantier.name }}</button>
+      </div>
     </div>
     <div class="content">
       <div class="left">
@@ -30,8 +31,8 @@
 <script>
 // @ is an alias to /src
 import TodayDate from '../../components/TodayDate.vue';
-import UserTable from '../../components/UserTable.vue';
-import TodayStats from '../../components/TodayStats.vue';
+import UserTable from './UserTable.vue';
+import TodayStats from './TodayStats.vue';
 import { createTables, listChantier, getTodayWorkOfChantier } from '../../functions/db';
 
 
@@ -42,6 +43,7 @@ export default {
       chantiers: [],  //id, name
       workers: [],  //id, name
       chantier_status: [],
+      selected: 0,
     }
   },
   async created () {
@@ -50,6 +52,7 @@ export default {
   },
   methods: {
     async selectChantier (id) { 
+      this.selected = id;
       this.selected_chantier_id = id;
       let serverResponse = await getTodayWorkOfChantier(id);
       this.workers = serverResponse['workers'];
@@ -71,7 +74,24 @@ createTables();
 </script>
 
 <style lang="scss" scoped>
-  .body {
+.chantier-list {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  button {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    text-decoration-line: underline;
+    color: #949494;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    &.active {
+      color: #000000;
+    }
+  }
+}
     .content {
       display: flex;
       justify-content: space-between;
@@ -140,5 +160,5 @@ createTables();
       gap: 2rem;
       
     }
-  }
+  
 </style>

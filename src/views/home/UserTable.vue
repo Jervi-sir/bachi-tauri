@@ -1,19 +1,19 @@
 <template>
-  <div class="table">
     <div class="shows">
       <div class="option">
-        <input type="checkbox" v-model="show.phone_number">
-        <span>show Phone Number</span>
+        <input id="phoneNumber" type="checkbox" v-model="show.phone_number">
+        <label for="phoneNumber">show Phone Number</label>
       </div>
       <div class="option">
-        <input type="checkbox" v-model="show.location">
-        <span>show location</span>
+        <input id="location" type="checkbox" v-model="show.location">
+        <label for="location">show location</label>
       </div>
       <div class="option">
-        <input type="checkbox" v-model="show.position">
-        <span>show position</span>
+        <input id="position" type="checkbox" v-model="show.position">
+        <label for="position">show position</label>
       </div>
     </div>
+  <div class="table">
     <table class="compar-table">
       <thead>
         <tr>
@@ -28,17 +28,8 @@
         </tr>
       </thead>
       <tbody class="compar-table_zebra">
-        <tr class="user" v-for="worker in workers" :key="worker.id">
-          <td>{{ worker.name }}</td>
-          <td data-pos-center="data-pos-center">
-            <input type="checkbox" :checked="worker.is_absent != 0">
-          </td>
-          <td v-show="show.phone_number"><span>{{ worker.phone_number }}</span></td>
-          <td v-show="show.location"><span>{{ worker.location }}</span></td>
-          <td v-show="show.position"><span>{{ worker.position }}</span></td>
-          <td><input type="number" placeholder="000 Da" :value="worker.hour_worked"></td>
-          <td><input type="text" placeholder="000 Da" :value="worker.revenue"></td>
-          <td><button>edit</button></td>
+        <tr class="user freezen" v-for="worker in workers" :key="worker.id" >
+          <UserRow :worker="worker" :chantier_id="chantier_id" />
         </tr>     
       </tbody>
     </table>
@@ -46,6 +37,7 @@
 </template>
 
 <script>
+import UserRow from './UserRow.vue';
 export default {
   data () {
     return {
@@ -59,15 +51,35 @@ export default {
   
   name: 'UserTable',
   props: ['workers', 'chantier_id'],
+  components: {
+    UserRow,
+  }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+
+.shows {
+  display: flex;
+  gap: 1rem;
+  .option {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    label {
+      font-weight: 600;
+      font-size: 12px;
+    }
+  }
+}
+
 .table {
   overflow-y: scroll;
 }
 .compar-table {
+  padding: 4px;
   color: black;
   background-color: white;
   width: 100%;
@@ -82,6 +94,10 @@ export default {
       text-align: left;
     }
   }
+  th {
+    text-align: center;
+  }
+  
   .user:nth-child(odd) {
     background: #f7f6f6;
   }
