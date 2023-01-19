@@ -11,7 +11,9 @@
         <div class="top">
           <div class="today-amount">
             <label for="">Total d'aujourd'hui</label>
-            <input type="text" placeholder="00,000 DA">
+            <input type="text" placeholder="00,000 DA" v-model="chantier_amount" :disabled="!activate_edit_amount">
+            <button v-if="!activate_edit_amount" @click="activate_edit_amount = true">edit</button>
+            <button v-else @click="updateChantierAmount(chantier_amount, today_chantierDB.id)">save</button>
           </div>
           <div class="search-name">
             <input type="text" placeholder="Nom">
@@ -21,7 +23,7 @@
         <UserTable :workers="workers" :chantier_id="selected_chantier_id"/>
       </div>
       <div class="right">
-        <TodayStats :nb_workers="workers.length" :status="chantier_status" />
+        <TodayStats :nb_workers="workers.length" :status="today_chantierDB" />
       </div>
     </div>
 
@@ -33,7 +35,7 @@
 import TodayDate from '../../components/TodayDate.vue';
 import UserTable from './UserTable.vue';
 import TodayStats from './TodayStats.vue';
-import { createTables, listChantier, getTodayWorkOfChantier } from '../../functions/db';
+import { createTables, listChantier, getTodayWorkOfChantier, updateChantierAmount } from '../../functions/db';
 
 
 export default {
@@ -42,23 +44,32 @@ export default {
       selected_chantier_id: '',
       chantiers: [],  //id, name
       workers: [],  //id, name
-      chantier_status: [],
       selected: 0,
+      activate_edit_amount: false,
+      chantier_amount: 0,
+      today_chantierDB: [],
     }
   },
   async created () {
     this.chantiers= await listChantier();
-    
   },
   methods: {
+     async updateChantierAmount(chantier_amount, today_chantier_id) { 
+      this.activate_edit_amount = false;
+      let serverResponse = await updateChantierAmount(chantier_amount, today_chantier_id);
+      this.chantier_amount = serverResponse.total_invested;
+    },
     async selectChantier (id) { 
+      this.chantier_amount = 0;
+      this.activate_edit_amount = false;
       this.selected = id;
       this.selected_chantier_id = id;
+
       let serverResponse = await getTodayWorkOfChantier(id);
       this.workers = serverResponse['workers'];
-      this.chantier_status = serverResponse['chantier'][0];
-      //console.log(this.chantier_status);
-      return null 
+      this.today_chantierDB = serverResponse['chantier'][0];
+      this.chantier_amount = this.today_chantierDB.total_invested;
+      console.log(this.workers);
     },
   },
   name: 'HomeView',

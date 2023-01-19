@@ -18,10 +18,10 @@
       <thead>
         <tr>
           <th data-pos-left="data-pos-left">Nom</th>
-          <th>Absence</th>
           <th v-show="show.phone_number">phone number</th>
           <th v-show="show.location">location</th>
           <th v-show="show.position">position</th>
+          <th>Absence</th>
           <th>hours Worked</th>
           <th>Payment</th>
           <th>edit/save</th>
@@ -29,7 +29,7 @@
       </thead>
       <tbody class="compar-table_zebra">
         <tr class="user freezen" v-for="worker in workers" :key="worker.id" >
-          <UserRow :worker="worker" :chantier_id="chantier_id" />
+          <UserRow :worker="worker" :chantier_id="chantier_id" :show="show"/>
         </tr>     
       </tbody>
     </table>
