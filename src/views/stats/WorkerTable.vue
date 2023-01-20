@@ -21,6 +21,7 @@
       </tbody>
     </table>
   </div>
+  <h5 v-if="workers.length == 0">No Worker registered</h5>
 </template>
 
 <script>
@@ -32,6 +33,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+h5 {
+  text-align: center;
+}
 .compar-table {
   color: black;
   background-color: white;

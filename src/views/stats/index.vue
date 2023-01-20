@@ -8,7 +8,7 @@
       </div>
     </div>
     <WorkerTable :workers="worker_chantier"/>
-    <div class="chantier_day_select">
+    <div v-if="selected != 0" class="chantier_day_select">
       <label for="">Stats by day </label>
       <select name="" id="" v-model="selected_day_id">
         <option value="" disabled selected>Select date to check</option>
@@ -16,8 +16,8 @@
       </select>
       <button class="show-btn" @click="showStatsOfDay(selected_day_id)" :disabled="selected_day_id == 0">Afficher</button>
     </div>
-    <ChantierDayTable :chantier_worker_day="chantier_day_worker_stats" :chantier_day_details="chantier_day_details"/>
-
+    <ChantierDayTable v-if="selected != 0" :chantier_worker_day="chantier_day_worker_stats" :chantier_day_details="chantier_day_details"/>
+    <h2 class="msg-select-chantier" v-if="selected == 0" >Select chantier</h2>
   </div>
 </template>
 
@@ -93,6 +93,10 @@ export default {
     padding: 0.3rem 0.7rem;
     padding-top: 0.2rem;
   }
+}
+
+.msg-select-chantier {
+  text-align: center;
 }
 
 .chantier-list {
