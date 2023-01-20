@@ -1,7 +1,8 @@
 <template>
-  <button @click="getWorkers(chantier_id)">view workers</button>
+  <button class="button" @click="getWorkers(chantier_id)">view workers</button>
   <div class="bg" v-if="show" @click="show = false"></div>
   <div class="form" v-if="show">
+      <span class="exit" @click="show = false">x</span>
       <h1>Show <u>{{ this.name }}</u> Workers</h1>
       <div class="stat">
         <div class="tota">
@@ -38,7 +39,7 @@
     <div class="add-worker">
       <span for="">add a worker</span>
       <select name="" id="" v-model="selected_non_worker_id">
-        <option disabled default selected>select worker</option>
+        <option value="" disabled selected>select worker</option>
         <option v-for="not_worker in not_workers" :key="not_worker.id" :value="not_worker.id">
           {{ not_worker.name }} - {{ not_worker.position }} 
         </option>
@@ -92,10 +93,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.button {
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: black;
+    opacity: 0.8;
+    transition: 0.2s;
+  }
+}
+
 hr {
   display: block;
   height: 1px;
   width: 100%;
+}
+.exit {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-weight: 800;
+  cursor: pointer;
 }
 .bg {
   width: 100vw;
@@ -129,6 +150,27 @@ hr {
     margin-right: 7px;
   }
   
+}
+.add-worker {
+  display: flex;
+  align-content: stretch;
+  align-items: center;
+  justify-content: space-between;
+  select {
+    border: 1px solid #000000;
+    border-radius: 7px;
+    font-weight: 400;
+    font-size: 15px;
+    color: #000000;
+    padding: 0.5rem 1rem;
+    padding-top: 0.4rem;
+  }
+  button {
+    background: black;
+    color:white;
+    border-radius: 5px;
+    padding: 0.5rem 0.7rem;
+  }
 }
 
 .styled-table {

@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <Header :componentId="routes" title="Chantier"/>
+    <Header :componentId="routes" title="Chantiers"/>
     <ChantierTable :chantiers="allChantiers"/>
   </div>
 </template>

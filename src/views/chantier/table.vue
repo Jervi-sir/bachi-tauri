@@ -66,7 +66,7 @@ export default {
     tr {
       background: #F7FCFF;
       color: #7B8188;
-      text-align: left;
+      text-align: center;
     }
   }
   .chantier:nth-child(odd) {
@@ -74,6 +74,9 @@ export default {
   }
   .chantier:nth-child(even) {
     background: white;
+  }
+  td {
+    text-align: center;
   }
 }
 </style>

@@ -1,7 +1,8 @@
 <template>
-  <button @click="editChantier(chantier_id)">edit</button>
+  <button class="button" @click="editChantier(chantier_id)">edit</button>
   <div class="bg" v-if="show" @click="show = false"></div>
   <form class="form" action="" @submit="updateChantier" v-if="show">
+    <span class="exit" @click="show = false">x</span>
     <h1>Edit <u>{{ this.original_name }}</u> Chantier</h1>
     <div class="row">
       <label for="">Name</label>
@@ -60,6 +61,25 @@ export default {
 
 
 <style lang="scss" scoped>
+.exit {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.button {
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: black;
+    opacity: 0.8;
+    transition: 0.2s;
+  }
+}
 .bg {
   width: 100vw;
   height: 100vh;
@@ -95,9 +115,9 @@ export default {
   input {
     background: #FFFFFF;
     border-radius: 10px;
-    padding: 7px;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 0.7rem 1rem;
   }
 
   button {

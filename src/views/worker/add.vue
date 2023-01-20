@@ -87,6 +87,7 @@ export default {
       font-size: 15px;
       color: #000000;
       padding: 0.5rem 1rem;
+      padding-top: 0.4rem;
     }
 
     button {

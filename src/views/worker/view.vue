@@ -2,6 +2,7 @@
   <button class="button" @click="viewWorker(worker_id)">stats</button>
   <div class="bg" v-if="show" @click="show = false"></div>
   <div class="form" v-if="show">
+    <span class="exit" @click="show = false">x</span>
     <h1>Show {{ this.name }} Worker</h1>
     <div class="row">
       <label for="">name:</label><span>{{ this.name }}</span> <br>
@@ -71,6 +72,13 @@ export default {
     opacity: 0.8;
     transition: 0.2s;
   }
+}
+.exit {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-weight: 800;
+  cursor: pointer;
 }
 .bg {
   width: 100vw;

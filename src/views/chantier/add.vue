@@ -72,6 +72,8 @@ export default {
     flex-direction: column;
     gap: 1.5rem;
     padding: 2rem 3rem;
+    width: 300px;
+    margin: auto;
     h1 {
       font-weight: 700;
       font-size: 25px;

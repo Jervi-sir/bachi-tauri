@@ -1,7 +1,8 @@
 <template>
-  <button @click="viewChantier(chantier_id)">stats</button>
+  <button class="button" @click="viewChantier(chantier_id)">stats</button>
   <div class="bg" v-if="show" @click="show = false"></div>
   <div class="form" v-if="show">
+      <span class="exit" @click="show = false">x</span>
       <h1>Show  <u>{{ this.name }}</u> Chantier</h1>
       <div class="row">
         <label for="">name:</label><span>{{ this.name }}</span> 
@@ -58,6 +59,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.button {
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: black;
+    opacity: 0.8;
+    transition: 0.2s;
+  }
+}
+.exit {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-weight: 800;
+  cursor: pointer;
+}
 .bg {
   width: 100vw;
   height: 100vh;

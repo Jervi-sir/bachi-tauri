@@ -22,6 +22,7 @@ body {
   background: #F9F9FB;
   gap: 2rem;
   font-family: 'Inter', sans-serif !important;
+  min-height: 99vh;
 }
 
 .header {
@@ -29,12 +30,15 @@ body {
   flex-direction: column;
   gap: 1rem;
   padding: 25px;
-  background: #FFFFFF;
   position: sticky;
   top: 0;
   .router-link-active {
     filter: invert(77%) sepia(0%) saturate(3508%) hue-rotate(346deg) brightness(137%) contrast(100%);
   }
+}
+header {
+  min-height: 99vh;
+  background: #FFFFFF;
 }
 
 .body {

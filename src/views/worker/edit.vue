@@ -22,9 +22,11 @@
     </div>
     <div class="row">
       <label for="">Position</label>
-      <input type="text" placeholder="position" v-model="position" required>
-      <select name="" id="">
-        <option value=""></option>
+      <select name="" v-model="position" >
+        <option value="" disabled selected > Selectionner sa Position</option>
+        <option value="masson">masson</option>
+        <option value="manourvri">manourvri</option>
+        <option value="autre">autre</option>
       </select>
     </div>
     <button>Update</button>
@@ -138,7 +140,7 @@ export default {
     display: flex;
     flex-direction: column;
   }
-  input {
+  input, select {
     background: #FFFFFF;
     border-radius: 7px;
     padding: 7px;
