@@ -1,5 +1,5 @@
 <template>
-  <button @click="viewWorker(worker_id)">stats</button>
+  <button class="button" @click="viewWorker(worker_id)">stats</button>
   <div class="bg" v-if="show" @click="show = false"></div>
   <div class="form" v-if="show">
     <h1>Show {{ this.name }} Worker</h1>
@@ -59,7 +59,20 @@ export default {
 
 </script>
 
-<style lang="scss" scoped>.bg {
+<style lang="scss" scoped>
+.button {
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: black;
+    opacity: 0.8;
+    transition: 0.2s;
+  }
+}
+.bg {
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -90,6 +103,9 @@ export default {
   label {
     font-weight: 800;
     margin-right: 7px;
+  }
+  input {
+    padding-left: 1rem
   }
   
 }

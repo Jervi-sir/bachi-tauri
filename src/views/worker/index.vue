@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <Header :componentId="routes" title="Workers"/>
+    <Header :componentId="routes" title="Travaleurs"/>
     <SuccessMessage :isActive="added_success"/>
     <WorkerTable :workers="allWorkers" />
   </div>

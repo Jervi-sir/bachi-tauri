@@ -1,7 +1,8 @@
 <template>
-  <button @click="editWorker(worker_id)">edit</button>
+  <button class="button" @click="editWorker(worker_id)">edit</button>
   <div class="bg" v-if="show" @click="show = false"></div>
   <form class="form" @submit="updateWorker" v-if="show">
+    <span class="exit" @click="show = false">x</span>
     <h1>Edit <u>{{ this.original_name }}</u> Worker</h1>
     <div class="row">
       <label for="">Name</label>
@@ -22,8 +23,10 @@
     <div class="row">
       <label for="">Position</label>
       <input type="text" placeholder="position" v-model="position" required>
+      <select name="" id="">
+        <option value=""></option>
+      </select>
     </div>
-
     <button>Update</button>
   </form>
 </template>
@@ -84,6 +87,18 @@ export default {
 
 
 <style lang="scss" scoped>
+.button {
+  background: transparent;
+  border: none;
+  text-decoration: underline;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: black;
+    opacity: 0.8;
+    transition: 0.2s;
+  }
+}
 .bg {
   width: 100vw;
   height: 100vh;
@@ -92,6 +107,13 @@ export default {
   left: 0;
   background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(1px);
+}
+.exit {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-weight: 800;
+  cursor: pointer;
 }
 .form {
   z-index: 99;
@@ -118,10 +140,12 @@ export default {
   }
   input {
     background: #FFFFFF;
-    border-radius: 10px;
+    border-radius: 7px;
     padding: 7px;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    padding: 8px;
+    padding-left: 12px;
   }
 
   button {

@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="add">
     <Header :componentId="routes" title="Workers"/>
 
     <form class="form" @submit="addWorker">
@@ -8,7 +8,12 @@
       <input type="date" v-model="birthday" placeholder="BirthDay">
       <input type="text" v-model="phone_number" placeholder="Phone Number">
       <input type="text" v-model="location" placeholder="location">
-      <input type="text" v-model="position" placeholder="position">
+      <select name="" v-model="position" >
+        <option value="" disabled selected > Selectionner sa Position</option>
+        <option value="masson">masson</option>
+        <option value="manourvri">manourvri</option>
+        <option value="autre">autre</option>
+      </select>
       <button>Ajouter</button>
     </form>
   </div>
@@ -57,6 +62,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .add {
+    flex: 1;
+  }
   .form {
     background: #FFFFFF;
     border-radius: 25px;
@@ -64,13 +72,15 @@ export default {
     flex-direction: column;
     gap: 1.5rem;
     padding: 2rem 3rem;
+    margin: auto;
+    width: 300px;
     h1 {
       font-weight: 700;
       font-size: 25px;
       color: #000000;
       margin: 0;
     }
-    input {
+    input, select {
       border: 1px solid #000000;
       border-radius: 7px;
       font-weight: 400;

@@ -1,9 +1,11 @@
 <template>
   <header>
-    <router-link to="/"><img src="./assets/images/home.svg" alt=""></router-link>
-    <router-link to="/worker"><img src="./assets/images/user.svg" alt=""></router-link>
-    <router-link to="/chantier"><img src="./assets/images/add.svg" alt=""></router-link>
-    <router-link to="/stats"><img src="./assets/images/stats.svg" alt=""></router-link>
+    <div class="header">
+      <router-link to="/"><img src="./assets/images/home.svg" alt=""></router-link>
+      <router-link to="/worker"><img src="./assets/images/user.svg" alt=""></router-link>
+      <router-link to="/chantier"><img src="./assets/images/add.svg" alt=""></router-link>
+      <router-link to="/stats"><img src="./assets/images/stats.svg" alt=""></router-link>
+    </div>
   </header>
   <router-view/>
 </template>
@@ -22,13 +24,14 @@ body {
   font-family: 'Inter', sans-serif !important;
 }
 
-header {
+.header {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 25px;
   background: #FFFFFF;
-
+  position: sticky;
+  top: 0;
   .router-link-active {
     filter: invert(77%) sepia(0%) saturate(3508%) hue-rotate(346deg) brightness(137%) contrast(100%);
   }
