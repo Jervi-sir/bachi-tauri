@@ -8,7 +8,7 @@
 <script>
 // @ is an alias to /src
 import ChantierTable from './table.vue';
-import { allChantier } from '../../functions/chantierDB';
+import { allChantier } from './_db';
 import Header from '../../components/Header.vue';
 import Routes from './routes.vue';
 

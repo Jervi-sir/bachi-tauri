@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import { getChantier } from '../../functions/chantierDB';
-import { updateChantier as updateCh } from '../../functions/chantierDB';
+import { getChantier } from './_db';
+import { updateChantier as updateCh } from './_db';
 export default {
   methods: {
     updateChantier (e) { 

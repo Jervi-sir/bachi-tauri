@@ -8,7 +8,7 @@
 
 <script>
 // @ is an alias to /src
-import { allWorkers } from '../../functions/workerDB';
+import { allWorkers } from './_db';
 import WorkerTable from './table.vue';
 import Routes from './routes.vue';
 import Header from '../../components/Header.vue';

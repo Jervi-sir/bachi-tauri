@@ -41,8 +41,7 @@ import TodayStats from './TodayStats.vue';
 import AddWorker from './AddWorker.vue';
 
 import { createTables } from '../../functions/globalDB';
-import { getTodayWorkOfChantier } from '../../functions/todayWorkDB';
-import { listChantier, updateChantierAmount } from '../../functions/chantierDB';
+import { getTodayWorkOfChantier, listChantier, updateChantierAmount } from './_db';
 
 import emitter from '../../emmiter'
 

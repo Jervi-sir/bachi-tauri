@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { getWorker } from '../../functions/workerDB';
+import { getWorker } from './_db';
 
 export default {
   methods: {

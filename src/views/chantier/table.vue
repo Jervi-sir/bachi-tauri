@@ -34,7 +34,7 @@
 <script>
 import ChantierView from './view.vue';
 import ChantierEdit from './edit.vue';
-import WorkerView from './workers.vue';
+import WorkerView from './workersTable.vue';
 
 export default {
   created () {

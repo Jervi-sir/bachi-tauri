@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { getWorkersNotInChantier, addWorkerToChantierFromTodayChantier } from '../../functions/todayWorkDB';
+import { getWorkersNotInChantier, addWorkerToChantierFromTodayChantier } from './_db';
 export default {
   methods: {
     async addWorkerToChantierModal() {

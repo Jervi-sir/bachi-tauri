@@ -34,11 +34,6 @@ export async function listChantier() {
   return rows;
 }
 
-export async function getWorkersChantier(chantier_id) {
-  const db = await connect();
-  const rows = await db.select("SELECT w.* FROM chantiers c JOIN worker_chantiers wc ON c.id = wc.chantier_id JOIN workers w ON wc.worker_id = w.id WHERE wc.chantier_id = ?1", [chantier_id])
-  return rows; 
-}
 
 export async function addWorkerToChantier(worker_id, chantier_id) {
   const db = await connect();
@@ -91,4 +86,11 @@ export async function updateChantierAmount(amount, id) {
   let resultDB = await db.select("SELECT * FROM today_chantiers WHERE id = ?1", [id]);
   console.log(resultDB[0]);
   return resultDB[0];
+}
+
+/*--- NOW USED ---*/
+export async function getWorkersChantier(chantier_id) {
+  const db = await connect();
+  const rows = await db.select("SELECT w.* FROM chantiers c JOIN worker_chantiers wc ON c.id = wc.chantier_id JOIN workers w ON wc.worker_id = w.id WHERE wc.chantier_id = ?1", [chantier_id])
+  return rows; 
 }

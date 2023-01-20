@@ -23,8 +23,7 @@
 
 <script>
 import TodayDate from '../../components/TodayDate.vue';
-import { listChantier } from '../../functions/chantierDB';
-import { statsOfChantier, statsOfChantierDay } from '../../functions/stats';
+import { listChantier, statsOfChantier, statsOfChantierDay } from './_db';
 import WorkerTable from './WorkerTable.vue';
 import ChantierDayTable from './ChantierDayTable.vue';
 

@@ -14,7 +14,7 @@
 <script>
 // @ is an alias to /src
 import TodayDate from '../../components/TodayDate.vue';
-import { insertChantier } from '../../functions/chantierDB';
+import { insertChantier } from './_db';
 import Routes from './routes.vue';
 import Header from '../../components/Header.vue';
 
