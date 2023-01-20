@@ -30,7 +30,6 @@
         <TodayStats :nb_workers="workers.length" :status="today_chantierDB" />
       </div>
     </div>
-
   </div>
 </template>
 

@@ -4,6 +4,7 @@ import Chantier from '../views/chantier/index.vue'
 import AddChantier from '../views/chantier/add.vue'
 import Workers from '../views/worker/index.vue'
 import AddWorker from '../views/worker/add.vue'
+import Stats from '../views/stats/index.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/chantier/add',
     name: 'chantier_add',
     component: AddChantier
+  },
+  {
+    path: '/stats',
+    name: 'stats',
+    component: Stats
   },
   {
     path: '/about',
