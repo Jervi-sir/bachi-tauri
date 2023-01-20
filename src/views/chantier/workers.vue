@@ -30,7 +30,7 @@
               <td>{{ worker.location }}</td>
               <td>{{ worker.birthday }}</td>
               <td>
-                <button @click="removeFromChantier(worker.id)">remove</button>
+                <button class="delete-btn" @click="removeFromChantierModal(worker.id)">Effacer</button>
               </td>
           </tr>
         </tbody>
@@ -47,10 +47,17 @@
       <button @click="addToChantier()">add to Chantier</button>
     </div>
     </div>
+    <div v-show="showRemoveChantierModal" class="remove-confirmation">
+      <h5>do u want to remove name from this chantier</h5>
+      <div class="options">
+        <button class="yes" @click="removeFromChantier(selected_worker_to_remove)">yes</button>
+        <button class="no" @click="showRemoveChantierModal = false">no</button>
+      </div>
+    </div>
 </template>
 
 <script>
-import { get_joinedWorkers_and_notJoinedWorkers, addWorkerToChantier, excludeWorkerFromChantier } from '../../functions/db';
+import { get_joinedWorkers_and_notJoinedWorkers, addWorkerToChantier, excludeWorkerFromChantier } from '../../functions/chantierDB';
 
 export default {
   methods: {
@@ -72,17 +79,24 @@ export default {
       //this id is not of the worker but of the many to many table rls
       await excludeWorkerFromChantier(id);
       setTimeout(() => {
-        this.show = false;
+        //this.show = false;
+        this.showRemoveChantierModal = false;
         window.location.reload();
       }, 20);
+    },
+    removeFromChantierModal(rls_id) {
+      this.showRemoveChantierModal = true;
+      this.selected_worker_to_remove = rls_id;
     }
   },
   data () {
     return {
       show: false,
+      showRemoveChantierModal: false,
       workers: [],
       not_workers: [],
       selected_non_worker_id: '',
+      selected_worker_to_remove: '',
     }
   },
   props: ['chantier_id'],
@@ -93,6 +107,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.delete-btn {
+  background: transparent;
+  color:rgb(221, 25, 25);
+  text-decoration: underline;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    color: rgb(126, 6, 6);
+    transition: 0.2s;
+  }
+}
+.remove-confirmation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 999;
+  transform: translate(-50%, -50%);
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px, rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(221, 25, 25) 0px 0px 0px 3px;
+  border-radius: 15px;
+  padding: 1.5rem;
+  .options {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    button {
+      color: black;
+      padding: 0.2rem 2rem;
+      cursor: pointer;
+      border-radius: 7px;
+      border: 1px solid rgb(221, 25, 25);
+    }
+    .yes {
+      background: rgb(221, 25, 25);
+    }
+    .no {
+      background: #3affbd;
+      border: 1px solid #14ca8e;
+    }
+  }
+}
 .button {
   background: transparent;
   border: none;

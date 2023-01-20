@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import { getWorker } from '../../functions/db';
-import { updateWorker as updateWr } from '../../functions/db';
+import { getWorker } from '../../functions/workerDB';
+import { updateWorker as updateWr } from '../../functions/workerDB';
 export default {
   methods: {
     updateWorker () { 

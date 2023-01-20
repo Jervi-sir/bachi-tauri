@@ -39,7 +39,7 @@
 
 
 <script>
-import { saveTodayWorkerWork } from '../../functions/db';
+import { saveTodayWorkerWork } from '../../functions/todayWorkDB';
 import emitter from '../../emmiter';
 export default  {
   methods: {

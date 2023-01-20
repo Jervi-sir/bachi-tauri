@@ -279,8 +279,8 @@ export async function addWorkerToChantierFromTodayChantier(worker_id, today_chan
   let today = new Date().toLocaleDateString();  // MM/DD/YYYY
   console.log(worker_id, today_chantier)
   //add it to worker_chantier
-  //await db.execute("INSERT INTO worker_chantiers (worker_id, chantier_id, created_at) VALUES (?1, ?2, ?3) ", 
- //         [worker_id, today_chantier.chantier_id, today]);
+  await db.execute("INSERT INTO worker_chantiers (worker_id, chantier_id, created_at) VALUES (?1, ?2, ?3) ", 
+            [worker_id, today_chantier.chantier_id, today]);
 
   //add it to today_work
   await db.execute("INSERT INTO today_works (worker_id, chantier_id, today_chantier_id, created_at) VALUES (?1, ?2, ?3, ?4)",

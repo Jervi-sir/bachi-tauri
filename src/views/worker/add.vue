@@ -21,7 +21,7 @@
 
 <script>
 // @ is an alias to /src
-import { insertWorker } from '../../functions/db';
+import { insertWorker } from '../../functions/workerDB';
 import Routes from './routes.vue';
 import Header from '../../components/Header.vue';
 

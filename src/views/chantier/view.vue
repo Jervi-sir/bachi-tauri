@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { getChantier, getTotalInvestChantier, getNbWorkersChantier } from '../../functions/db';
+import { getChantier, getTotalInvestChantier, getNbWorkersChantier } from '../../functions/chantierDB';
 
 export default {
   methods: {
