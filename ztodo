@@ -23,16 +23,17 @@
 
 
 ---- TODO URGENT -----
-[] style chantier list in home page
-[] style option of table in home page
-[] style list all chantier
-[] list all workers styling
+[x] style chantier list in home page
+[x] style option of table in home page
+[x] style list all chantier
+[x] list all workers styling
 
-[] make total today functional
-  [] add button of save
-[] make each worker edit income functional
-  [] add button of save or edit
+[x] make total today functional
+  [x] add button of save
+[x] make each worker edit income functional
+  [x] add button of save or edit
   
+[] confirmation modal for delete 
 [] update total spent in the statistic also in Database
 [] disable chantier
 

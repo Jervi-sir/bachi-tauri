@@ -273,3 +273,24 @@ export async function saveTodayWorkerWork(today_worker_id, today_chantier_id, is
     'total_spent': total_spent
   }
 }
+
+export async function addWorkerToChantierFromTodayChantier(worker_id, today_chantier) {
+  const db = await connect();
+  let today = new Date().toLocaleDateString();  // MM/DD/YYYY
+  console.log(worker_id, today_chantier)
+  //add it to worker_chantier
+  //await db.execute("INSERT INTO worker_chantiers (worker_id, chantier_id, created_at) VALUES (?1, ?2, ?3) ", 
+ //         [worker_id, today_chantier.chantier_id, today]);
+
+  //add it to today_work
+  await db.execute("INSERT INTO today_works (worker_id, chantier_id, today_chantier_id, created_at) VALUES (?1, ?2, ?3, ?4)",
+                    [worker_id, today_chantier.chantier_id, today_chantier.id, today_chantier.created_at]);
+
+}
+
+export async function getWorkersNotInChantier(chantier_id) {
+  const db = await connect();
+  let notJoined = await db.select("SELECT * FROM workers joined WHERE id NOT IN (SELECT w.id FROM workers w JOIN worker_chantiers wc ON wc.worker_id = w.id  WHERE wc.chantier_id = ?1)", [chantier_id]);
+  console.log(notJoined);
+  return notJoined;
+}

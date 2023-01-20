@@ -17,6 +17,9 @@
             <button v-if="!activate_edit_amount" @click="activate_edit_amount = true">Edit</button>
             <button class="save" v-else @click="updateChantierAmount(chantier_amount, today_chantierDB.id)">Save</button>
           </div>
+          <div class="add-worker">
+            <AddWorker :today_chantier="today_chantierDB"/>
+          </div>
         </div>
         <UserTable v-if="selected_chantier_id" :workers="workers" :today_chantier_id="today_chantierDB.id"/>
         <div class="please-select" v-if="!selected_chantier_id">
@@ -36,6 +39,7 @@
 import TodayDate from '../../components/TodayDate.vue';
 import UserTable from './UserTable.vue';
 import TodayStats from './TodayStats.vue';
+import AddWorker from './AddWorker.vue';
 import { createTables, listChantier, getTodayWorkOfChantier, updateChantierAmount } from '../../functions/db';
 import emitter from '../../emmiter'
 
@@ -84,7 +88,8 @@ export default {
   components: {
     TodayDate,
     UserTable,
-    TodayStats
+    TodayStats,
+    AddWorker
   }
 }
 
@@ -129,6 +134,7 @@ createTables();
       .top {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         .today-amount {
           display: flex;
           align-items: center;
@@ -189,6 +195,7 @@ createTables();
         }
       }
     }
+   
     .right {
       width: 20%;
       text-align: center;
