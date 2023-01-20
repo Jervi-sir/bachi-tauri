@@ -249,8 +249,24 @@ export async function getTodayWorkOfChantier_OLD(chantier_id) {
   }
 }
 
-export async function saveTodayWorkerWork(today_worker_id, is_absent, revenue, hour_worked) {
+export async function saveTodayWorkerWork(today_worker_id, today_chantier_id, is_absent, revenue, hour_worked) {
   const db = await connect();
+
+  //get worker old revenue and apply on it new revenue
+  let worker_today_work = await db.select("SELECT * FROM today_works WHERE id = ?1", [today_worker_id]);
+  //save new revenue to today work
   await db.execute("UPDATE today_works SET is_absent = ?2, revenue = ?3, hour_worked = ?4 WHERE id = ?1",
             [today_worker_id, is_absent, revenue, hour_worked]);
+
+
+  //update today_chantier spent amount
+  //get chantier_id and today_date from today_works with today_chantier_id
+  let today_chantierDB = await db.select("SELECT * FROM today_works WHERE chantier_id = ?1 AND today_chantier_id = ?2",
+            [worker_today_work[0].chantier_id, worker_today_work[0].today_chantier_id]);
+  //sum of all revenues
+  var total_spent = today_chantierDB.map(item => item.revenue).reduce((acc, item) => parseInt(item) + parseInt(acc));
+
+  //update chanteir today spent money
+  await db.execute("UPDATE today_chantiers SET total_spent= ?1 WHERE id = ?2", [total_spent, today_chantier_id]);
+
 }

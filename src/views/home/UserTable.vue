@@ -29,7 +29,7 @@
       </thead>
       <tbody class="compar-table_zebra">
         <tr class="user freezen" v-for="worker in workers" :key="worker.id" >
-          <UserRow :worker="worker" :chantier_id="chantier_id" :show="show"/>
+          <UserRow :worker="worker" :today_chantier_id="today_chantier_id" :show="show"/>
         </tr>     
       </tbody>
     </table>
@@ -50,7 +50,7 @@ export default {
   },
   
   name: 'UserTable',
-  props: ['workers', 'chantier_id'],
+  props: ['workers', 'today_chantier_id'],
   components: {
     UserRow,
   }

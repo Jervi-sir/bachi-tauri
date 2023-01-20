@@ -20,7 +20,7 @@
             <button><img src="../../assets/images/search.svg" alt=""></button>
           </div>
         </div>
-        <UserTable :workers="workers" :chantier_id="selected_chantier_id"/>
+        <UserTable :workers="workers" :today_chantier_id="today_chantierDB.id"/>
       </div>
       <div class="right">
         <TodayStats :nb_workers="workers.length" :status="today_chantierDB" />
@@ -69,7 +69,6 @@ export default {
       this.workers = serverResponse['workers'];
       this.today_chantierDB = serverResponse['chantier'][0];
       this.chantier_amount = this.today_chantierDB.total_invested;
-      console.log(this.workers);
     },
   },
   name: 'HomeView',

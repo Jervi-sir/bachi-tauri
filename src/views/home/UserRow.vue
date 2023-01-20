@@ -42,7 +42,7 @@ export default  {
   methods: {
     async updateWorker () { 
       this.isActivated = false;
-      await saveTodayWorkerWork(this.worker.today_worker_id, this.worker.is_absent, this.worker.revenue, this.worker.hour_worked)
+      await saveTodayWorkerWork(this.worker.today_worker_id, this.today_chantier_id, this.worker.is_absent, this.worker.revenue, this.worker.hour_worked)
     
     },
     onlyNumber ($event) {
@@ -57,7 +57,7 @@ export default  {
       isActivated: false,
     }
   },
-  props: ['worker', 'chantier_id', 'show']
+  props: ['worker', 'today_chantier_id', 'show']
 }
 </script>
 
