@@ -4,17 +4,17 @@
 
     <form class="form" @submit="addWorker">
       <h1>Ajouter un travailleur</h1>
-      <input type="text" v-model="name" placeholder="Nom">
-      <input type="date" v-model="birthday" placeholder="BirthDay">
-      <input type="text" v-model="phone_number" placeholder="Phone Number">
-      <input type="text" v-model="location" placeholder="location">
+      <input type="text" v-model="name" placeholder="Nom" required>
+      <input type="date" v-model="birthday" placeholder="BirthDay" required>
+      <input type="text" v-model="phone_number" placeholder="Phone Number" required>
+      <input type="text" v-model="location" placeholder="location" required>
       <select name="" v-model="position" >
         <option value="" disabled selected > Selectionner sa Position</option>
         <option value="masson">masson</option>
         <option value="manourvri">manourvri</option>
         <option value="autre">autre</option>
       </select>
-      <button>Ajouter</button>
+      <button :disabled="disable_button">Ajouter</button>
     </form>
   </div>
 </template>
@@ -34,22 +34,26 @@ export default {
       location: '',
       position: '',
       added_success: false,
-      routes: Routes
+      routes: Routes,
+      disable_button: false,
     }
   },
   methods: {
     addWorker (e) { 
       e.preventDefault();
+      this.disable_button = true;
       insertWorker(this.name, this.birthday, this.phone_number, this.location, this.position);
       this.added_success = true;
       this.name = '';
       this.location = '';
       this.phone_number = '';
       this.position = '';
+      this.emitter.emit('trigger_success_popup', true)
 
       setTimeout(() => {
         this.added_success = false;
-        //document.location.reload(true);
+        this.emitter.emit('trigger_success_popup', false)
+        window.location.reload(true);
       }, 1000);
     },
   },

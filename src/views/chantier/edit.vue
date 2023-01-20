@@ -1,7 +1,7 @@
 <template>
   <button class="button" @click="editChantier(chantier_id)">edit</button>
   <div class="bg" v-if="show" @click="show = false"></div>
-  <form class="form" action="" @submit="updateChantier" v-if="show">
+  <div class="form" v-if="show">
     <span class="exit" @click="show = false">x</span>
     <h1>Edit <u>{{ this.original_name }}</u> Chantier</h1>
     <div class="row">
@@ -13,23 +13,27 @@
       <label for="">Location</label>
       <input type="text" placeholder="location" v-model="location" required>
     </div>
-    <button>Update</button>
-  </form>
+    <button @click="updateChantier()">Update</button>
+  </div>
 </template>
 
 <script>
 import { getChantier } from './_db';
 import { updateChantier as updateCh } from './_db';
+
 export default {
   methods: {
-    updateChantier (e) { 
-      e.preventDefault();
+    async updateChantier (e) { 
+      //e.preventDefault();
+      this.emitter.emit('trigger_success_popup', true)
 
-      updateCh(this.chantier_id, this.name, this.location);
+      await updateCh(this.chantier_id, this.name, this.location);
+
       setTimeout(() => {
         this.show = false;
-        window.location.reload();
-      }, 20);
+        this.emitter.emit('trigger_success_popup', false)
+        window.location.reload(true);
+      }, 1000);
 
     },
     async editChantier(id) { 

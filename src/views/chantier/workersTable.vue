@@ -44,7 +44,7 @@
           {{ not_worker.name }} - {{ not_worker.position }} 
         </option>
       </select>
-      <button @click="addToChantier()">add to Chantier</button>
+      <button @click="addToChantier()" :disabled="disable_add_button">add to Chantier</button>
     </div>
     </div>
     <div v-show="showRemoveChantierModal" class="remove-confirmation">
@@ -66,23 +66,27 @@ export default {
       this.workers = serverResponse['joined'];
       this.not_workers = serverResponse['notJoined'];
       this.show = true;
-      console.log(this.workers);
     },
     async addToChantier() {
+      this.disable_add_button = true;
       await addWorkerToChantier(this.selected_non_worker_id, this.chantier_id);
+      this.emitter.emit('trigger_success_popup', true)
       setTimeout(() => {
         this.show = false;
+        this.emitter.emit('trigger_success_popup', false)
         window.location.reload();
-      }, 20);
+      }, 1000);
     },
     async removeFromChantier(id) {
       //this id is not of the worker but of the many to many table rls
+      this.emitter.emit('trigger_success_popup', true)
       await excludeWorkerFromChantier(id);
       setTimeout(() => {
         //this.show = false;
+        this.emitter.emit('trigger_success_popup', false)
         this.showRemoveChantierModal = false;
         window.location.reload();
-      }, 20);
+      }, 1000);
     },
     removeFromChantierModal(rls_id) {
       this.showRemoveChantierModal = true;
@@ -97,6 +101,7 @@ export default {
       not_workers: [],
       selected_non_worker_id: '',
       selected_worker_to_remove: '',
+      disable_add_button: false,
     }
   },
   props: ['chantier_id'],
@@ -122,7 +127,7 @@ export default {
   position: fixed;
   top: 50%;
   left: 50%;
-  z-index: 999;
+  z-index: 769;
   transform: translate(-50%, -50%);
   background: white;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px, rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(221, 25, 25) 0px 0px 0px 3px;

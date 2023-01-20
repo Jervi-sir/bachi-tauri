@@ -29,7 +29,7 @@
         <option value="autre">autre</option>
       </select>
     </div>
-    <button>Update</button>
+    <button :disabled="disable_button">Update</button>
   </form>
 </template>
 
@@ -38,6 +38,7 @@ import { getWorker, updateWorker as updateWr } from './_db';
 export default {
   methods: {
     updateWorker () { 
+      this.disable_button = true;
       updateWr(
         this.worker_id,
         this.name,
@@ -46,10 +47,12 @@ export default {
         this.position,
         this.location,
       );
+      this.emitter.emit('trigger_success_popup', true)
       setTimeout(() => {
         this.show = false;
+        this.emitter.emit('trigger_success_popup', false)
         window.location.reload();
-      }, 20);
+      }, 1000);
 
     },
     async editWorker (id) { 
@@ -76,7 +79,8 @@ export default {
       phone_number: '',
       location: '',
       position: '',
-      created_at: ''
+      created_at: '',
+      disable_button: false,
     }
   },
 

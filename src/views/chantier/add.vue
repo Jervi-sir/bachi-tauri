@@ -1,7 +1,6 @@
 <template>
   <div class="body">
     <Header :componentId="routes" title="Chantier"/>
-
     <form class="form" @submit="addChantier">
       <h1>Ajouter un chantier</h1>
       <input type="text" placeholder="Nom" v-model="name" required>
@@ -32,15 +31,17 @@ export default {
     }
   },
   methods: {
-    addChantier(e) { 
+    async addChantier(e) { 
       e.preventDefault();
-      insertChantier(this.name, this.location);
+      await insertChantier(this.name, this.location);
       this.added_success = true;
       this.name = '';
       this.location = '';
+      this.emitter.emit('trigger_success_popup', true)
 
       setTimeout(() => {
         this.added_success = false;
+        this.emitter.emit('trigger_success_popup', false)
         document.location.reload(true);
       }, 1000);
 
