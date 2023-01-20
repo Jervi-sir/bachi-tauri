@@ -2,7 +2,6 @@
   <div class="today-date">
     <span class="date">{{date}}</span>
     <span class="time">{{time}}<small>:{{second}}</small></span>
-    
   </div>
 </template>
 
@@ -54,6 +53,7 @@ export default {
   align-items: flex-end;
   align-content: flex-end;
   gap: 1rem;
+  margin-top: 1rem;
   .date {
     font-weight: 700;
     font-size: 30px;

@@ -2,21 +2,26 @@
   <div class="body">
     <TodayDate />
     <div class="chantier-list">
+      <strong>Chantier: </strong>
       <div class="chantier"  v-for="chantier in chantiers" :key="chantier.id">
         <button @click="selectChantier(chantier.id)" :class="{ 'active': selected == chantier.id }">{{ chantier.name }}</button>
       </div>
     </div>
     <div class="content">
       <div class="left">
-        <div class="top">
+        <div v-if="selected_chantier_id" class="top">
           <div class="today-amount">
             <label for="">Total d'aujourd'hui</label>
             <input type="text" placeholder="00,000 DA" v-model="chantier_amount" :disabled="!activate_edit_amount" @keypress="onlyNumber">
-            <button v-if="!activate_edit_amount" @click="activate_edit_amount = true">edit</button>
-            <button v-else @click="updateChantierAmount(chantier_amount, today_chantierDB.id)">save</button>
+            <span>D.A</span>
+            <button v-if="!activate_edit_amount" @click="activate_edit_amount = true">Edit</button>
+            <button class="save" v-else @click="updateChantierAmount(chantier_amount, today_chantierDB.id)">Save</button>
           </div>
         </div>
-        <UserTable :workers="workers" :today_chantier_id="today_chantierDB.id"/>
+        <UserTable v-if="selected_chantier_id" :workers="workers" :today_chantier_id="today_chantierDB.id"/>
+        <div class="please-select" v-if="!selected_chantier_id">
+          <h2>Veuillez selectionner un chantier</h2>
+        </div>
       </div>
       <div class="right">
         <TodayStats :nb_workers="workers.length" :status="today_chantierDB" />
@@ -88,10 +93,15 @@ createTables();
 </script>
 
 <style lang="scss" scoped>
+.please-select {
+  text-align: center;
+}
 .chantier-list {
   display: flex;
   flex-direction: row;
   width: 100%;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
   button {
     font-weight: 600;
     font-size: 16px;
@@ -138,6 +148,23 @@ createTables();
             color: #545454;
             background: transparent;
             border: none;
+            text-align: end;
+            width: 7rem;
+          }
+          button {
+            background: rgb(0, 0, 0);
+            color:white;
+            border-radius: 10px;
+            padding: 5px 10px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            &.save {
+              background: #32de84;
+              color:#4B5320;
+
+            }
           }
         }
         .search-name {

@@ -1,17 +1,18 @@
 <template>
-    <td>{{ worker.name }}</td>
-    <td v-show="show.phone_number"><span>{{ worker.phone_number }}</span></td>
-    <td v-show="show.location"><span>{{ worker.location }}</span></td>
-    <td v-show="show.position"><span>{{ worker.position }}</span></td>
-    <td data-pos-center="data-pos-center">
+    <td :class="{ 'disable' : isActivated == false}" >{{ worker.name }}</td>
+    <td :class="{ 'disable' : isActivated == false}" v-show="show.phone_number"><span>{{ worker.phone_number }}</span></td>
+    <td :class="{ 'disable' : isActivated == false}" v-show="show.location"><span>{{ worker.location }}</span></td>
+    <td :class="{ 'disable' : isActivated == false}" v-show="show.position"><span>{{ worker.position }}</span></td>
+    <td :class="{ 'disable' : isActivated == false}" data-pos-center="data-pos-center">
       <input 
+        :class="{ 'disable' : isActivated == false}"
         :disabled="isActivated == false" 
         type="checkbox" 
         :checked="worker.is_absent != 0" 
         v-model="worker.is_absent" 
         @click="worker.is_absent == 0 ? worker.revenue = 0 : worker.revenue = worker.revenue">
     </td>
-    <td>
+    <td :class="{ 'disable' : isActivated == false}">
       <input  
       :disabled="isActivated == false" 
       class="worked-hours" 
@@ -20,7 +21,7 @@
       max="20" min="0" 
       v-model="worker.hour_worked">
     </td>
-    <td>
+    <td :class="{ 'disable' : isActivated == false}">
       <input 
         :disabled="isActivated == false || worker.is_absent != 0" 
         class="worker-revenue" 
@@ -31,8 +32,8 @@
         >
       </td>
     <td>
-      <button v-if="!isActivated" @click="isActivated = true">edit</button>
-      <button v-else @click="updateWorker()">save</button>
+      <button v-if="!isActivated" @click="isActivated = true">Edit</button>
+      <button class="save" v-else @click="updateWorker()">Save</button>
     </td>
 </template>
 
@@ -66,7 +67,11 @@ export default  {
 <style lang="scss" scoped>
   td {
     text-align: center;
+    &.disable {
+      background: rgba(53, 23, 1, 0.123);
+    }
   }
+  
   
   input[type=number]::-webkit-inner-spin-button, 
   input[type=number]::-webkit-outer-spin-button {
@@ -82,5 +87,20 @@ export default  {
   .worker-revenue {
     width: 4rem;
     text-align: center;
+  }
+  button {
+    background: rgba(0, 0, 0, 0.26);
+    color:black;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    &.save {
+      background: #32de84;
+      color:#4B5320;
+
+    }
   }
 </style>

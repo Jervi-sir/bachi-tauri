@@ -1,5 +1,5 @@
 <template>
-    <div class="shows">
+  <div class="shows">
       <div class="option">
         <input id="phoneNumber" type="checkbox" v-model="show.phone_number">
         <label for="phoneNumber">show Phone Number</label>
@@ -64,6 +64,8 @@ export default {
 .shows {
   display: flex;
   gap: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   .option {
     display: flex;
     flex-direction: row;
