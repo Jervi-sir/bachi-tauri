@@ -29,6 +29,7 @@ import emitter from '../../emmiter'
 export default {
   created () {
     emitter.on('total_invested', e => this.status.total_invested = e )
+    emitter.on('today_spent', e => this.status.total_spent = e )
   },
   name: 'TodayStats',
   props: ['status', 'nb_workers']

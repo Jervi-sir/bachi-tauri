@@ -269,4 +269,7 @@ export async function saveTodayWorkerWork(today_worker_id, today_chantier_id, is
   //update chanteir today spent money
   await db.execute("UPDATE today_chantiers SET total_spent= ?1 WHERE id = ?2", [total_spent, today_chantier_id]);
 
+  return {
+    'total_spent': total_spent
+  }
 }

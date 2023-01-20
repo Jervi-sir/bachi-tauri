@@ -36,14 +36,16 @@
     </td>
 </template>
 
+
 <script>
 import { saveTodayWorkerWork } from '../../functions/db';
+import emitter from '../../emmiter';
 export default  {
   methods: {
     async updateWorker () { 
       this.isActivated = false;
-      await saveTodayWorkerWork(this.worker.today_worker_id, this.today_chantier_id, this.worker.is_absent, this.worker.revenue, this.worker.hour_worked)
-    
+      let serverResponse = await saveTodayWorkerWork(this.worker.today_worker_id, this.today_chantier_id, this.worker.is_absent, this.worker.revenue, this.worker.hour_worked)
+      emitter.emit('today_spent', serverResponse.total_spent);
     },
     onlyNumber ($event) {
       let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
