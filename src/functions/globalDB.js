@@ -19,7 +19,7 @@ export async function createTables() {
     CREATE TABLE IF NOT EXISTS workers (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT, 
-      birthday DATE,
+      birthday TEXT,
       phone_number TEXT,
       position TEXT,
       location TEXT,
@@ -36,7 +36,7 @@ export async function createTables() {
     CREATE TABLE IF NOT EXISTS today_chantiers(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       chantier_id INTEGER,
-      today_date DATE,
+      today_date TEXT,
       total_invested TEXT,
       total_spent TEXT,
       created_at DATE,

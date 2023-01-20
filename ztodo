@@ -33,11 +33,11 @@
 [x] make each worker edit income functional
   [x] add button of save or edit
   
-[] confirmation modal for delete 
-[] update total spent in the statistic also in Database
+[x] confirmation modal for delete 
+[x] update total spent in the statistic also in Database
+
+
 [] disable chantier
-
-
 [x] make clock of page functional
 [?] remove worker completely
 [x] list workers button on each Chantier
