@@ -11,13 +11,9 @@
         <div class="top">
           <div class="today-amount">
             <label for="">Total d'aujourd'hui</label>
-            <input type="text" placeholder="00,000 DA" v-model="chantier_amount" :disabled="!activate_edit_amount">
+            <input type="text" placeholder="00,000 DA" v-model="chantier_amount" :disabled="!activate_edit_amount" @keypress="onlyNumber">
             <button v-if="!activate_edit_amount" @click="activate_edit_amount = true">edit</button>
             <button v-else @click="updateChantierAmount(chantier_amount, today_chantierDB.id)">save</button>
-          </div>
-          <div class="search-name">
-            <input type="text" placeholder="Nom">
-            <button><img src="../../assets/images/search.svg" alt=""></button>
           </div>
         </div>
         <UserTable :workers="workers" :today_chantier_id="today_chantierDB.id"/>
@@ -36,7 +32,7 @@ import TodayDate from '../../components/TodayDate.vue';
 import UserTable from './UserTable.vue';
 import TodayStats from './TodayStats.vue';
 import { createTables, listChantier, getTodayWorkOfChantier, updateChantierAmount } from '../../functions/db';
-
+import emitter from '../../emmiter'
 
 export default {
   data () {
@@ -54,10 +50,18 @@ export default {
     this.chantiers= await listChantier();
   },
   methods: {
+    onlyNumber ($event) {
+      let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
+      if ((keyCode < 48 || keyCode > 57)) { // 46 is dot
+          $event.preventDefault();
+      }
+    },
      async updateChantierAmount(chantier_amount, today_chantier_id) { 
       this.activate_edit_amount = false;
       let serverResponse = await updateChantierAmount(chantier_amount, today_chantier_id);
       this.chantier_amount = serverResponse.total_invested;
+      emitter.emit('total_invested', this.chantier_amount)
+
     },
     async selectChantier (id) { 
       this.chantier_amount = 0;
