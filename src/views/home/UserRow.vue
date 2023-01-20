@@ -22,7 +22,7 @@
     </td>
     <td>
       <input 
-        :disabled="isActivated == false" 
+        :disabled="isActivated == false || worker.is_absent != 0" 
         class="worker-revenue" 
         type="text"
         placeholder="000 DA"  
