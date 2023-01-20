@@ -38,8 +38,14 @@ export async function listChantier() {
 export async function addWorkerToChantier(worker_id, chantier_id) {
   const db = await connect();
   let today = new Date().toLocaleDateString();
+  //let chantier = await db.select("SELECT * FROM chantiers WHERE id = ?1", [chantier_id]);
+  //await db.execute("UPDATE chantiers SET nb_workers = ?2 WHERE id = ?1", [chantier_id, chantier[0].nb_workers + 1]);
   //TODO verify if id worker and id chantier exists
   await db.execute("INSERT INTO worker_chantiers ('worker_id', 'chantier_id', 'created_at') VALUES (?1, ?2, ?3)", [worker_id, chantier_id, today]);
+  let chantier_workers = await db.select("SELECT * FROM worker_chantiers WHERE chantier_id = ?1", [chantier_id]);
+  console.log(chantier_workers.length)
+  await db.execute("UPDATE chantiers SET nb_workers = ?2 WHERE id = ?1", [chantier_id, chantier_workers.length]);
+
 }
 
 export async function getTotalInvestChantier(chantier_id) {
@@ -77,7 +83,10 @@ export async function get_joinedWorkers_and_notJoinedWorkers(chantier_id) {
 
 export async function excludeWorkerFromChantier(deal_id) {
   const db = await connect();
+  let chantier_id = await db.select("SELECT chantier_id FROM worker_chantiers WHERE id = ?1", [deal_id]);
+  let chantier_workers = await db.select("SELECT * FROM worker_chantiers WHERE chantier_id = ?1", [chantier_id[0].chantier_id]);
   await db.execute("DELETE FROM worker_chantiers WHERE id = ?1", [deal_id]);
+  await db.execute("UPDATE chantiers SET nb_workers = ?2 WHERE id = ?1", [chantier_id[0].chantier_id, chantier_workers.length]);
 }
 
 export async function updateChantierAmount(amount, id) {

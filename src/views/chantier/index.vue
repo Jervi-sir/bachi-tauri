@@ -13,8 +13,6 @@ import Header from '../../components/Header.vue';
 import Routes from './routes.vue';
 
 export default {
-  watch: {
-  },
   data () {
     return {
       allChantiers: [],

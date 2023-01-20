@@ -14,6 +14,7 @@ export async function createTables() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT,
       location TEXT,
+      nb_workers INTEGER,
       created_at DATE
     ); 
     CREATE TABLE IF NOT EXISTS workers (

@@ -1,7 +1,7 @@
 <template>
   <button class="button" @click="editChantier(chantier_id)">edit</button>
   <div class="bg" v-if="show" @click="show = false"></div>
-  <div class="form" v-if="show">
+  <form class="form" v-if="show" @submit="updateChantier()">
     <span class="exit" @click="show = false">x</span>
     <h1>Edit <u>{{ this.original_name }}</u> Chantier</h1>
     <div class="row">
@@ -13,8 +13,8 @@
       <label for="">Location</label>
       <input type="text" placeholder="location" v-model="location" required>
     </div>
-    <button @click="updateChantier()">Update</button>
-  </div>
+    <button >Update</button>
+  </form>
 </template>
 
 <script>

@@ -6,7 +6,7 @@ import { connect } from '../../functions/globalDB';
 export async function insertChantier(name, location) {
   const db = await connect();
   let today = new Date().toLocaleDateString()
-  await db.execute("INSERT INTO chantiers ('name', 'location', 'created_at') VALUES (?1, ?2, ?3)", [name, location, today]);
+  await db.execute("INSERT INTO chantiers ('name', 'location', 'created_at', 'nb_workers') VALUES (?1, ?2, ?3, ?4)", [name, location, today, 0]);
 }
 
 /* used_in = ['edit.vue', 'view.vue'] -*/

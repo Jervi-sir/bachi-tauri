@@ -44,7 +44,7 @@
           {{ not_worker.name }} - {{ not_worker.position }} 
         </option>
       </select>
-      <button @click="addToChantier()" :disabled="disable_add_button">add to Chantier</button>
+      <button @click="addToChantier()" :disabled="disable_add_button || selected_non_worker_id == ''">add to Chantier</button>
     </div>
     </div>
     <div v-show="showRemoveChantierModal" class="remove-confirmation">
@@ -230,6 +230,11 @@ hr {
     color:white;
     border-radius: 5px;
     padding: 0.5rem 0.7rem;
+    cursor: pointer;
+    &:disabled {
+      opacity: 0.5;
+      color: #636363;
+    }
   }
 }
 

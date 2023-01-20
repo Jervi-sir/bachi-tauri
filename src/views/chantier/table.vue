@@ -5,7 +5,7 @@
         <tr>
           <th data-pos-left="data-pos-left">Nom</th>
           <th>location</th>
-          <th>date</th>
+          <th>nb workers</th>
           <th>edit</th>
           <th>view</th>
           <th>workers</th>
@@ -15,7 +15,7 @@
         <tr class="chantier" v-for="(chantier, index) in chantiers" v-bind:key="index">
           <td>{{ chantier.name }}</td>
           <td>{{ chantier.location }}</td>
-          <td>{{ chantier.created_at }}</td>
+          <td>{{ chantier.nb_workers }}</td>
           <td>
             <ChantierEdit :chantier_id="chantier.id" />
           </td>
