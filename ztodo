@@ -49,5 +49,5 @@
 /*----issues ---*/
 [] when add payment for worker, total paid is not updating, in stats too
 [] change and swipe menu items
-[] age in add worker, i workersTable(chantier)
+[x] age in add worker, i workersTable(chantier) and number input
 [x] worker doesnt have selec option

@@ -15,7 +15,7 @@
       <tbody class="compar-table_zebra">
         <tr class="worker" v-for="(worker, index) in workers" v-bind:key="index">
           <td>{{ worker.name }}</td>
-          <td>{{ worker.birthday }}</td>
+          <td>{{ showAge(worker.birthday)}} ans, ({{ worker.birthday }})</td>
           <td>{{ worker.phone_number }}</td>
           <td>{{ worker.location }}</td>
           <td>{{ worker.position }}</td>
@@ -35,6 +35,7 @@
 <script>
 import WorkerView from './view.vue';
 import WorkerEdit from './edit.vue';
+import { calculateAge } from '../../functions/helpers';
 
 export default {
   name: 'WorkerTable',
@@ -42,6 +43,11 @@ export default {
   components: {
     WorkerView,
     WorkerEdit
+  },
+  methods:{
+    showAge(birthday) {
+      return calculateAge(birthday)
+    }
   }
 
 }

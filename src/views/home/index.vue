@@ -39,7 +39,7 @@ import TodayDate from '../../components/TodayDate.vue';
 import UserTable from './UserTable.vue';
 import TodayStats from './TodayStats.vue';
 import AddWorker from './AddWorker.vue';
-
+import { filterNumbers } from '../../functions/helpers';
 import { createTables } from '../../functions/globalDB';
 import { getTodayWorkOfChantier, listChantier, updateChantierAmount } from './_db';
 
@@ -62,10 +62,7 @@ export default {
   },
   methods: {
     onlyNumber ($event) {
-      let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
-      if ((keyCode < 48 || keyCode > 57)) { // 46 is dot
-          $event.preventDefault();
-      }
+      filterNumbers($event);
     },
      async updateChantierAmount(chantier_amount, today_chantier_id) { 
       this.activate_edit_amount = false;

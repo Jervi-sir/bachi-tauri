@@ -40,8 +40,11 @@
 
 <script>
 import { saveTodayWorkerWork } from './_db';
+import { filterNumbers } from '../../functions/helpers';
 import emitter from '../../emmiter';
 export default  {
+  props: {
+  },
   methods: {
     async updateWorker () { 
       this.isActivated = false;
@@ -49,11 +52,8 @@ export default  {
       emitter.emit('today_spent', serverResponse.total_spent);
     },
     onlyNumber ($event) {
-      let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
-      if ((keyCode < 48 || keyCode > 57)) { // 46 is dot
-          $event.preventDefault();
-      }
-    }
+      filterNumbers($event);
+    },
   },
   data () {
     return {

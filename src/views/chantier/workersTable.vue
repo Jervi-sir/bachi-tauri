@@ -28,7 +28,7 @@
               <td>{{ worker.phone_number }}</td>
               <td>{{ worker.position }}</td>
               <td>{{ worker.location }}</td>
-              <td>{{ worker.birthday }}</td>
+              <td>{{ showAge(worker.birthday) }} <small>ans</small></td>
               <td>
                 <button class="delete-btn" @click="removeFromChantierModal(worker)">Effacer</button>
               </td>
@@ -58,6 +58,7 @@
 
 <script>
 import { get_joinedWorkers_and_notJoinedWorkers, addWorkerToChantier, excludeWorkerFromChantier } from './_db';
+import { calculateAge } from '../../functions/helpers';
 
 export default {
   methods: {
@@ -92,6 +93,9 @@ export default {
       this.showRemoveChantierModal = true;
       this.selected_worker_to_remove = worker.id;
       this.selected_worker_name_to_remove = worker.name;
+    },
+    showAge(birthday) {
+      return calculateAge(birthday);
     }
   },
   data () {
