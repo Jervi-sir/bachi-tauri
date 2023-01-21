@@ -50,6 +50,7 @@ export default  {
       this.isActivated = false;
       let serverResponse = await saveTodayWorkerWork(this.worker.today_worker_id, this.today_chantier_id, this.worker.is_absent, this.worker.revenue, this.worker.hour_worked)
       emitter.emit('today_spent', serverResponse.total_spent);
+      console.log(serverResponse)
     },
     onlyNumber ($event) {
       filterNumbers($event);

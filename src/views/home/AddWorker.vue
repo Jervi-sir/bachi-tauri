@@ -1,5 +1,5 @@
 <template>
-  <button class="button" @click="addWorkerToChantierModal()">Ajouter un Travailleur</button>
+  <button class="button" @click="addWorkerToChantierModal()">Ajouter un Ouvrier</button>
   <div class="bg" v-if="show" @click="show = false"></div>
   <div class="form" @submit="updateWorker" v-if="show">
     <span class="exit" @click="show = false">x</span>

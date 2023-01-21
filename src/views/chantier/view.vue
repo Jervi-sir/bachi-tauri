@@ -11,7 +11,7 @@
         <label for="">Emplacement:</label><span>{{ this.location }}</span> 
       </div>
       <div class="row">
-        <label for="">Nb Travailleurs:</label><span>{{ this.nb_worker }}</span> 
+        <label for="">Nb Ouvriers:</label><span>{{ this.nb_worker }}</span> 
       </div>
       <div class="row">
         <label for="">Total investi:</label><span>{{ this.total_invested }}</span> 

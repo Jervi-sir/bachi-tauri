@@ -3,7 +3,7 @@ const documentDirPath = await documentDir();
 import Database from "tauri-plugin-sql-api";
 
 export async function connect() {
-  const db = await Database.load('sqlite:' + documentDirPath + '/test.db')
+  const db = await Database.load('sqlite:' + documentDirPath + '/ChantiersManager.db')
   return db;
 }
 
@@ -14,7 +14,7 @@ export async function createTables() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT,
       location TEXT,
-      nb_workers INTEGER,
+      nb_workers INTEGER DEFAULT 0,
       created_at DATE
     ); 
     CREATE TABLE IF NOT EXISTS workers (
@@ -38,8 +38,8 @@ export async function createTables() {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       chantier_id INTEGER,
       today_date TEXT,
-      total_invested TEXT,
-      total_spent TEXT,
+      total_invested TEXT DEFAULT 0,
+      total_spent TEXT DEFAULT 0,
       created_at DATE,
       FOREIGN KEY(chantier_id) REFERENCES chantiers(id)
     );
@@ -48,9 +48,9 @@ export async function createTables() {
       worker_id INTEGER,
       chantier_id INTEGER,
       today_chantier_id INTEGER,
-      is_absent BOOL,
-      revenue TEXT,
-      hour_worked TEXT,
+      is_absent BOOL DEFAULT 0,
+      revenue TEXT DEFAULT 0,
+      hour_worked TEXT DEFAULT 0,
       created_at DATE,
       FOREIGN KEY(worker_id) REFERENCES workers(id),
       FOREIGN KEY(chantier_id) REFERENCES chantiers(id),

@@ -3,7 +3,7 @@
   <div class="bg" v-if="show" @click="{show = false; showRemoveChantierModal = false}"></div>
   <div class="form" v-if="show">
       <span class="exit" @click="{show = false; showRemoveChantierModal = false}">x</span>
-      <h1>Afficher Les Travailleurs</h1>
+      <h1>Afficher Les Ouvriers</h1>
       <div class="stat">
         <div class="tota">
           <label for="">Total</label>
@@ -37,7 +37,7 @@
     </table>
     <hr>
     <div class="add-worker">
-      <span for="">Ajouter un travailleur</span>
+      <span for="">Ajouter un Ouvriers</span>
       <select name="" id="" v-model="selected_non_worker_id">
         <option value="" disabled selected>Selectionnez</option>
         <option v-for="not_worker in not_workers" :key="not_worker.id" :value="not_worker.id">

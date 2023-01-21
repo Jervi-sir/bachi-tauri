@@ -3,6 +3,9 @@
     <span class="date">{{date}}</span>
     <span class="time">{{time}}<small>:{{second}}</small></span>
   </div>
+  <a href="/about" class="info">
+    <img src="../assets/images/info.svg" alt="">
+  </a>
 </template>
 
 <script>
@@ -48,6 +51,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.info {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  img {
+    width: 25px;
+    cursor: pointer;
+  }
+}
 .today-date {
   display: flex;
   align-items: flex-end;

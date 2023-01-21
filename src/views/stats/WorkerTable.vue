@@ -21,7 +21,7 @@
       </tbody>
     </table>
   </div>
-  <h5 v-if="workers.length == 0">Aucun travailleur inscrit</h5>
+  <h5 v-if="workers.length == 0">Aucun Ouvrier inscrit</h5>
 </template>
 
 <script>

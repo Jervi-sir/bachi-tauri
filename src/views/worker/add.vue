@@ -1,9 +1,9 @@
 <template>
   <div class="add">
-    <Header :componentId="routes" title="Ajouter Travailleur"/>
+    <Header :componentId="routes" title="Ajouter Ouvrier"/>
 
     <form class="form" @submit="addWorker">
-      <h1>Ajouter un travailleur</h1>
+      <h1>Ajouter un Ouvrier</h1>
       <div class="row">
         <label for="">Nom</label>
         <input type="text" v-model="name" placeholder="Entrez son Nom" required>
@@ -18,7 +18,7 @@
       </div>
       <div class="row">
         <label for="">Localisation</label>
-        <input type="text" v-model="location" placeholder="Où habite le travailleur" required>
+        <input type="text" v-model="location" placeholder="Où habite le Ouvrier" required>
       </div>
       <div class="row">
         <label for="">Poste</label>

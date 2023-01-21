@@ -5,10 +5,16 @@ import AddChantier from '../views/chantier/add.vue'
 import Workers from '../views/worker/index.vue'
 import AddWorker from '../views/worker/add.vue'
 import Stats from '../views/stats/index.vue'
+import Animation from '../Animation.vue'
 
 const routes = [
   {
     path: '/',
+    name: 'animation',
+    component: Animation
+  },
+  {
+    path: '/home',
     name: 'home',
     component: Home
   },

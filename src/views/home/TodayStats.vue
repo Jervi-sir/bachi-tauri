@@ -14,7 +14,7 @@
       <span>{{ status.total_spent || 0 }}</span>
     </div>
     <div class="amount-worker">
-      <label for="">Travailleurs</label>
+      <label for="">Ouvriers</label>
       <span>{{ nb_workers || 0 }}</span>
     </div>
     <div class="payed-lefts">

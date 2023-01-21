@@ -1,7 +1,7 @@
 <template>
   <div class="details">
     <div class="row">
-      <label>Travailleurs: </label>
+      <label>Ouvriers: </label>
       <span>{{  chantier_worker_day.length }} </span>
     </div>
     <div class="row">

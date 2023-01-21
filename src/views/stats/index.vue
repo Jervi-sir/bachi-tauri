@@ -1,6 +1,7 @@
 <template>
   <div class="body">
     <TodayDate />
+    <h2>Statistique des Chantiers</h2>
     <div class="chantier-list">
       <strong>Chantiers: </strong>
       <div class="chantier"  v-for="chantier in chantierList" :key="chantier.id">
@@ -72,6 +73,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .chantier_day_select {
   margin-top: 1rem;
   display: flex;

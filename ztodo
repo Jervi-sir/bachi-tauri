@@ -47,7 +47,7 @@
 [x] modal for edit and stats of each chantier
 
 /*----issues ---*/
-[] when add payment for worker, total paid is not updating, in stats too
+[x] when add payment for worker, total paid is not updating, in stats too
 [] change and swipe menu items
 [x] age in add worker, i workersTable(chantier) and number input
 [x] worker doesnt have selec option

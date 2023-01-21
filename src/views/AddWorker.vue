@@ -2,7 +2,7 @@
   <div class="about">
     <TodayDate />
     <form class="form" @submit="addWorker">
-      <h1>Ajouter un travailleur</h1>
+      <h1>Ajouter un Ouvriers</h1>
       <input type="text" v-model="name" placeholder="Nom">
       <input type="date" v-model="birthday" placeholder="BirthDay">
       <input type="text" v-model="phone_number" placeholder="Phone Number">

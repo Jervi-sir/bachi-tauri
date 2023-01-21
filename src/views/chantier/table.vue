@@ -7,7 +7,7 @@
           <th>Localisation</th>
           <th>edit</th>
           <th>view</th>
-          <th>Travailleurs</th>
+          <th>Ouvriers</th>
         </tr>
       </thead>
       <tbody class="compar-table_zebra">
