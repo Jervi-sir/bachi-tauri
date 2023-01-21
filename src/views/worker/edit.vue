@@ -5,31 +5,31 @@
     <span class="exit" @click="show = false">x</span>
     <h1>Edit <u>{{ this.original_name }}</u> Worker</h1>
     <div class="row">
-      <label for="">Name</label>
+      <label for="">Nom</label>
       <input type="text" placeholder="Nom" v-model="name" required>
     </div>
     <div class="row">
-      <label for="">birthday</label>
+      <label for="">Date Naissance</label>
       <input type="text" placeholder="birthday" v-model="birthday" required>
     </div>
     <div class="row">
-      <label for="">Phone Number</label>
+      <label for="">Téléphone</label>
       <input type="text" placeholder="Phone Number" v-model="phone_number" required>
     </div>
     <div class="row">
-      <label for="">Location</label>
+      <label for="">Localisation</label>
       <input type="text" placeholder="location" v-model="location" required>
     </div>
     <div class="row">
-      <label for="">Position</label>
+      <label for="">Poste</label>
       <select name="" v-model="position" >
-        <option value="" disabled selected > Selectionner sa Position</option>
+        <option value="" disabled selected > Selectionner son Poste</option>
         <option value="masson">masson</option>
         <option value="manourvri">manourvri</option>
         <option value="autre">autre</option>
       </select>
     </div>
-    <button :disabled="disable_button">Update</button>
+    <button :disabled="disable_button">Mettre à jour</button>
   </form>
 </template>
 

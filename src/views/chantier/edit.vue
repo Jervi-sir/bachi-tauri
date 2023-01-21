@@ -3,17 +3,17 @@
   <div class="bg" v-if="show" @click="show = false"></div>
   <form class="form" v-if="show" @submit="updateChantier()">
     <span class="exit" @click="show = false">x</span>
-    <h1>Edit <u>{{ this.original_name }}</u> Chantier</h1>
+    <h1>Edit ce Chantier</h1>
     <div class="row">
-      <label for="">Name</label>
+      <label for="">Nom</label>
       <input type="text" placeholder="Nom" v-model="name" required>
     </div>
 
     <div class="row">
-      <label for="">Location</label>
-      <input type="text" placeholder="location" v-model="location" required>
+      <label for="">Emplacement</label>
+      <input type="text" placeholder="Où se situe le chantier" v-model="location" required>
     </div>
-    <button >Update</button>
+    <button>Mettre à jour</button>
   </form>
 </template>
 
@@ -115,6 +115,11 @@ export default {
   .row {
     display: flex;
     flex-direction: column;
+    label {
+      text-align: start;
+      padding-left: 10px;
+      padding-bottom: 3px;
+    }
   }
   input {
     background: #FFFFFF;

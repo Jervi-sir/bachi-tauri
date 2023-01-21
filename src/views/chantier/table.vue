@@ -4,18 +4,16 @@
       <thead>
         <tr>
           <th data-pos-left="data-pos-left">Nom</th>
-          <th>location</th>
-          <th>nb workers</th>
+          <th>Localisation</th>
           <th>edit</th>
           <th>view</th>
-          <th>workers</th>
+          <th>Travailleurs</th>
         </tr>
       </thead>
       <tbody class="compar-table_zebra">
         <tr class="chantier" v-for="(chantier, index) in chantiers" v-bind:key="index">
           <td>{{ chantier.name }}</td>
           <td>{{ chantier.location }}</td>
-          <td>{{ chantier.nb_workers }}</td>
           <td>
             <ChantierEdit :chantier_id="chantier.id" />
           </td>
@@ -23,6 +21,7 @@
             <ChantierView :chantier_id="chantier.id" />
           </td>
           <td>
+            ( {{ chantier.nb_workers }} )
             <WorkerView :chantier_id="chantier.id" />
           </td>
         </tr>

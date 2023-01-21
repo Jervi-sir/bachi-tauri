@@ -4,10 +4,10 @@
       <thead>
         <tr>
           <th data-pos-left="data-pos-left">Nom</th>
-          <th>age</th>
-          <th>phone</th>
-          <th>location</th>
-          <th>position</th>
+          <th>Age</th>
+          <th>Téléphone</th>
+          <th>Localisation</th>
+          <th>Poste</th>
           <th>edit</th>
           <th>view</th>
         </tr>

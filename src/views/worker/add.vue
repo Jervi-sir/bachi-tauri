@@ -1,19 +1,34 @@
 <template>
   <div class="add">
-    <Header :componentId="routes" title="Workers"/>
+    <Header :componentId="routes" title="Ajouter Travailleur"/>
 
     <form class="form" @submit="addWorker">
       <h1>Ajouter un travailleur</h1>
-      <input type="text" v-model="name" placeholder="Nom" required>
-      <input type="date" v-model="birthday" placeholder="BirthDay" required>
-      <input type="text" v-model="phone_number" placeholder="Phone Number" required>
-      <input type="text" v-model="location" placeholder="location" required>
-      <select name="" v-model="position" >
-        <option value="" disabled selected > Selectionner sa Position</option>
-        <option value="masson">masson</option>
-        <option value="manourvri">manourvri</option>
-        <option value="autre">autre</option>
-      </select>
+      <div class="row">
+        <label for="">Nom</label>
+        <input type="text" v-model="name" placeholder="Entrez son Nom" required>
+      </div>
+      <div class="row">
+        <label for="">Date Naissance</label>
+        <input type="date" v-model="birthday" placeholder="BirthDay" required>
+      </div>
+      <div class="row">
+        <label for="">Téléphone</label>
+        <input type="text" v-model="phone_number" placeholder="Phone Number" required>
+      </div>
+      <div class="row">
+        <label for="">Localisation</label>
+        <input type="text" v-model="location" placeholder="Où habite le travailleur" required>
+      </div>
+      <div class="row">
+        <label for="">Poste</label>
+        <select name="" v-model="position" >
+          <option value="" disabled selected > Selectionner son Poste</option>
+          <option value="masson">masson</option>
+          <option value="manourvri">manourvri</option>
+          <option value="autre">autre</option>
+        </select>
+      </div>
       <button :disabled="disable_button">Ajouter</button>
     </form>
   </div>
@@ -68,6 +83,16 @@ export default {
 <style lang="scss" scoped>
   .add {
     flex: 1;
+    margin-bottom: 5rem;
+
+  }
+  .row {
+    display: flex;
+    flex-direction: column;
+    label {
+      padding-left: 10px;
+      padding-bottom: 5px;
+    }
   }
   .form {
     background: #FFFFFF;
@@ -78,11 +103,13 @@ export default {
     padding: 2rem 3rem;
     margin: auto;
     width: 300px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px, rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
     h1 {
       font-weight: 700;
       font-size: 25px;
       color: #000000;
       margin: 0;
+      text-align: center;
     }
     input, select {
       border: 1px solid #000000;
@@ -102,6 +129,7 @@ export default {
       font-size: 15px;
       color: #FFFFFF;
       padding: 1rem 1rem;
+      cursor: pointer;
     }
   }
 </style>

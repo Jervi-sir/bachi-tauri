@@ -1,7 +1,7 @@
 <template>
   <div class="option-list">
-    <router-link to="/worker">showAll</router-link> | 
-    <router-link to="/worker/add">add</router-link>
+    <router-link to="/worker">Afficher Tous</router-link> | 
+    <router-link to="/worker/add">Ajouter un Travailleur</router-link>
   </div>
 </template>
 

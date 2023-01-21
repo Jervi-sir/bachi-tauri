@@ -1,24 +1,25 @@
 <template>
-  <button class="button" @click="viewChantier(chantier_id)">stats</button>
+  <button class="button" @click="viewChantier(chantier_id)">détails</button>
   <div class="bg" v-if="show" @click="show = false"></div>
   <div class="form" v-if="show">
       <span class="exit" @click="show = false">x</span>
-      <h1>Show  <u>{{ this.name }}</u> Chantier</h1>
+      <h1>Détails du Chantier</h1>
       <div class="row">
-        <label for="">name:</label><span>{{ this.name }}</span> 
+        <label for="">Nom:</label><span>{{ this.name }}</span> 
       </div>
       <div class="row">
-        <label for="">location:</label><span>{{ this.location }}</span> 
+        <label for="">Emplacement:</label><span>{{ this.location }}</span> 
       </div>
       <div class="row">
-        <label for="">nb_worker:</label><span>{{ this.nb_worker }}</span> 
+        <label for="">Nb Travailleurs:</label><span>{{ this.nb_worker }}</span> 
       </div>
       <div class="row">
-        <label for="">total_spent:</label><span>{{ this.total_spent }}</span> 
+        <label for="">Total investi:</label><span>{{ this.total_invested }}</span> 
       </div>
       <div class="row">
-        <label for="">created_at:</label><span>{{ this.created_at }}</span> 
+        <label for="">Total dépensé:</label><span>{{ this.total_spent }}</span> 
       </div>
+      
     </div>
 </template>
 

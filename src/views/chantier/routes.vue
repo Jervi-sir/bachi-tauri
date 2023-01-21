@@ -1,7 +1,7 @@
 <template>
   <div class="option-list">
-    <router-link to="/chantier">showAll</router-link> | 
-    <router-link to="/chantier/add">add</router-link>
+    <router-link to="/chantier">Afficher Tous</router-link> | 
+    <router-link to="/chantier/add">Ajouter un Chantier</router-link>
   </div>
 </template>
 

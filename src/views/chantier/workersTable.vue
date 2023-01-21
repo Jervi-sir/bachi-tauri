@@ -1,12 +1,12 @@
 <template>
-  <button class="button" @click="getWorkers(chantier_id)">view workers</button>
-  <div class="bg" v-if="show" @click="show = false"></div>
+  <button class="button" @click="getWorkers(chantier_id)">Afficher List</button>
+  <div class="bg" v-if="show" @click="{show = false; showRemoveChantierModal = false}"></div>
   <div class="form" v-if="show">
-      <span class="exit" @click="show = false">x</span>
-      <h1>Show <u>{{ this.name }}</u> Workers</h1>
+      <span class="exit" @click="{show = false; showRemoveChantierModal = false}">x</span>
+      <h1>Afficher Les Travailleurs</h1>
       <div class="stat">
         <div class="tota">
-          <label for="">total</label>
+          <label for="">Total</label>
           <span>{{ workers.length }}</span>
         </div>
       </div>
@@ -14,12 +14,12 @@
       <table class="styled-table">
         <thead>
           <tr>
-              <th>Name</th>
-              <th>phone_number</th>
-              <th>position</th>
-              <th>location</th>
-              <th>birthday</th>
-              <th>remove</th>
+              <th>Nom</th>
+              <th>Téléphone</th>
+              <th>Poste</th>
+              <th>Localisation</th>
+              <th>Age</th>
+              <th>...</th>
           </tr>
         </thead>
         <tbody>
@@ -30,25 +30,25 @@
               <td>{{ worker.location }}</td>
               <td>{{ worker.birthday }}</td>
               <td>
-                <button class="delete-btn" @click="removeFromChantierModal(worker.id)">Effacer</button>
+                <button class="delete-btn" @click="removeFromChantierModal(worker)">Effacer</button>
               </td>
           </tr>
         </tbody>
     </table>
     <hr>
     <div class="add-worker">
-      <span for="">add a worker</span>
+      <span for="">Ajouter un travailleur</span>
       <select name="" id="" v-model="selected_non_worker_id">
-        <option value="" disabled selected>select worker</option>
+        <option value="" disabled selected>Selectionnez</option>
         <option v-for="not_worker in not_workers" :key="not_worker.id" :value="not_worker.id">
           {{ not_worker.name }} - {{ not_worker.position }} 
         </option>
       </select>
-      <button @click="addToChantier()" :disabled="disable_add_button || selected_non_worker_id == ''">add to Chantier</button>
+      <button @click="addToChantier()" :disabled="disable_add_button || selected_non_worker_id == ''">Ajouter Le</button>
     </div>
     </div>
     <div v-show="showRemoveChantierModal" class="remove-confirmation">
-      <h5>do u want to remove name from this chantier</h5>
+      <h5>Voulez-vous supprimer <small> {{ selected_worker_name_to_remove }} </small> du chantier</h5>
       <div class="options">
         <button class="yes" @click="removeFromChantier(selected_worker_to_remove)">yes</button>
         <button class="no" @click="showRemoveChantierModal = false">no</button>
@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { get_joinedWorkers_and_notJoinedWorkers, addWorkerToChantier, excludeWorkerFromChantier } from '../../functions/chantierDB';
+import { get_joinedWorkers_and_notJoinedWorkers, addWorkerToChantier, excludeWorkerFromChantier } from './_db';
 
 export default {
   methods: {
@@ -88,9 +88,10 @@ export default {
         window.location.reload();
       }, 1000);
     },
-    removeFromChantierModal(rls_id) {
+    removeFromChantierModal(worker) {
       this.showRemoveChantierModal = true;
-      this.selected_worker_to_remove = rls_id;
+      this.selected_worker_to_remove = worker.id;
+      this.selected_worker_name_to_remove = worker.name;
     }
   },
   data () {
@@ -102,6 +103,7 @@ export default {
       selected_non_worker_id: '',
       selected_worker_to_remove: '',
       disable_add_button: false,
+      selected_worker_name_to_remove: '',
     }
   },
   props: ['chantier_id'],
@@ -151,6 +153,9 @@ export default {
       background: #3affbd;
       border: 1px solid #14ca8e;
     }
+  }
+  small {
+    color: red;
   }
 }
 .button {
@@ -236,6 +241,7 @@ hr {
       color: #636363;
     }
   }
+  
 }
 
 .styled-table {

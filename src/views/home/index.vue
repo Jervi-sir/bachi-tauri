@@ -2,7 +2,7 @@
   <div class="body">
     <TodayDate />
     <div class="chantier-list">
-      <strong>Chantier: </strong>
+      <strong>Chantiers: </strong>
       <div class="chantier"  v-for="chantier in chantiers" :key="chantier.id">
         <button @click="selectChantier(chantier.id)" :class="{ 'active': selected == chantier.id }">{{ chantier.name }}</button>
       </div>
@@ -12,7 +12,7 @@
         <div v-if="selected_chantier_id" class="top">
           <div class="today-amount">
             <label for="">Total d'aujourd'hui</label>
-            <input type="text" placeholder="00,000 DA" v-model="chantier_amount" :disabled="!activate_edit_amount" @keypress="onlyNumber">
+            <input type="text" placeholder="000" v-model="chantier_amount" :disabled="!activate_edit_amount" @keypress="onlyNumber">
             <span>D.A</span>
             <button v-if="!activate_edit_amount" @click="activate_edit_amount = true">Edit</button>
             <button class="save" v-else @click="updateChantierAmount(chantier_amount, today_chantierDB.id)">Save</button>

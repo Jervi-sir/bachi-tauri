@@ -2,22 +2,22 @@
   <div class="body">
     <TodayDate />
     <div class="chantier-list">
-      <strong>Chantier: </strong>
+      <strong>Chantiers: </strong>
       <div class="chantier"  v-for="chantier in chantierList" :key="chantier.id">
         <button @click="selectChantier(chantier.id)" :class="{ 'active': selected == chantier.id }">{{ chantier.name }}</button>
       </div>
     </div>
     <WorkerTable :workers="worker_chantier"/>
     <div v-if="selected != 0" class="chantier_day_select">
-      <label for="">Stats by day </label>
+      <label for="">Stats par Journée </label>
       <select name="" id="" v-model="selected_day_id">
-        <option value="" disabled selected>Select date to check</option>
+        <option value="" disabled selected>Selectionnez une Date</option>
         <option :value="day.id" v-for="day in chantier_days" :key="day.id">{{ day.today_date }}</option>
       </select>
       <button class="show-btn" @click="showStatsOfDay(selected_day_id)" :disabled="selected_day_id == 0">Afficher</button>
     </div>
     <ChantierDayTable v-if="selected != 0" :chantier_worker_day="chantier_day_worker_stats" :chantier_day_details="chantier_day_details"/>
-    <h2 class="msg-select-chantier" v-if="selected == 0" >Select chantier</h2>
+    <h2 class="msg-select-chantier" v-if="selected == 0" >Selectionner un chantier</h2>
   </div>
 </template>
 
@@ -82,6 +82,7 @@ export default {
     color: white;
     border-radius: 7px;
     padding: 0.3rem 0.7rem;
+    cursor: pointer;
   }
   select {
     border: 1px solid #000000;

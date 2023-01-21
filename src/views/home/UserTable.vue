@@ -2,15 +2,15 @@
   <div class="shows">
       <div class="option">
         <input id="phoneNumber" type="checkbox" v-model="show.phone_number">
-        <label for="phoneNumber">show Phone Number</label>
+        <label for="phoneNumber">Afficher Téléphone</label>
       </div>
       <div class="option">
         <input id="location" type="checkbox" v-model="show.location">
-        <label for="location">show location</label>
+        <label for="location">Afficher Localisation</label>
       </div>
       <div class="option">
         <input id="position" type="checkbox" v-model="show.position">
-        <label for="position">show position</label>
+        <label for="position">Afficher Poste</label>
       </div>
     </div>
   <div class="table">
@@ -18,12 +18,12 @@
       <thead>
         <tr>
           <th data-pos-left="data-pos-left">Nom</th>
-          <th v-show="show.phone_number">phone number</th>
-          <th v-show="show.location">location</th>
-          <th v-show="show.position">position</th>
+          <th v-show="show.phone_number">Téléphone</th>
+          <th v-show="show.location">Localisation</th>
+          <th v-show="show.position">Poste</th>
           <th>Absence</th>
-          <th>hours Worked</th>
-          <th>Payment</th>
+          <th>Heures</th>
+          <th>Paiement</th>
           <th>edit/save</th>
         </tr>
       </thead>

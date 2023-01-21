@@ -3,11 +3,11 @@
     <table class="compar-table">
       <thead>
         <tr>
-          <th data-pos-left="data-pos-left">name</th>
-          <th>phone_number</th>
-          <th>position</th>
-          <th>location</th>
-          <th>birthday</th>
+          <th data-pos-left="data-pos-left">Nom</th>
+          <th>Téléphone</th>
+          <th>Poste</th>
+          <th>Localisation</th>
+          <th>Age</th>
         </tr>
       </thead>
       <tbody class="compar-table_zebra">
@@ -21,7 +21,7 @@
       </tbody>
     </table>
   </div>
-  <h5 v-if="workers.length == 0">No Worker registered</h5>
+  <h5 v-if="workers.length == 0">Aucun travailleur inscrit</h5>
 </template>
 
 <script>

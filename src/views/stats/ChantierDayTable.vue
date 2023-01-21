@@ -1,19 +1,19 @@
 <template>
   <div class="details">
     <div class="row">
-      <label>Nb Workers: </label>
-      <span>{{  chantier_worker_day.length }} Workers</span>
+      <label>Travailleurs: </label>
+      <span>{{  chantier_worker_day.length }} </span>
     </div>
     <div class="row">
-      <label>total spent: </label>
+      <label>Total dépensé: </label>
       <span>{{ chantier_day_details.total_spent }} D.A</span>
     </div>
     <div class="row">
-      <label>total invested: </label>
+      <label>Total investi: </label>
       <span>{{ chantier_day_details.total_invested }} D.A</span>
     </div>
     <div class="row">
-      <label>total left: </label>
+      <label>Total restant: </label>
       <span>{{ chantier_day_details.total_invested - chantier_day_details.total_spent }} D.A</span>
     </div>
 
@@ -22,12 +22,12 @@
     <table class="compar-table">
       <thead>
         <tr>
-          <th data-pos-left="data-pos-left">name</th>
-          <th>phone_number</th>
-          <th>position</th>
-          <th>hours</th>
-          <th>revenue</th>
-          <th>absent</th>
+          <th data-pos-left="data-pos-left">Nom</th>
+          <th>Téléphone</th>
+          <th>Poste</th>
+          <th>Heurs</th>
+          <th>Paiment</th>
+          <th>absence</th>
         </tr>
       </thead>
       <tbody class="compar-table_zebra">

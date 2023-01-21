@@ -45,3 +45,9 @@
 [x] delete worker from chantier
 [x] modal for edit and stats of each worker
 [x] modal for edit and stats of each chantier
+
+/*----issues ---*/
+[] when add payment for worker, total paid is not updating, in stats too
+[] change and swipe menu items
+[] age in add worker, i workersTable(chantier)
+[x] worker doesnt have selec option

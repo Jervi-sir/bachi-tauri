@@ -3,8 +3,14 @@
     <Header :componentId="routes" title="Chantier"/>
     <form class="form" @submit="addChantier">
       <h1>Ajouter un chantier</h1>
-      <input type="text" placeholder="Nom" v-model="name" required>
-      <input type="text" placeholder="location" v-model="location" required>
+      <div class="row">
+        <label for="">Nom</label>
+        <input type="text" placeholder="Nom" v-model="name" required>
+      </div>
+      <div class="row">
+        <label for="">Localisation</label>
+        <input type="text" placeholder="Entrer l'emplacement du chantier" v-model="location" required>
+      </div>
       <button >Ajouter</button>
     </form>
   </div>
@@ -66,20 +72,30 @@ export default {
     opacity: 0;
   }
   
+  .row {
+    display: flex;
+    flex-direction: column;
+    label {
+      padding-left: 10px;
+      padding-block: 5px;
+    }
+  }
   .form {
     background: #FFFFFF;
     border-radius: 25px;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     padding: 2rem 3rem;
     width: 300px;
     margin: auto;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px, rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
     h1 {
       font-weight: 700;
       font-size: 25px;
       color: #000000;
       margin: 0;
+      text-align: center;
     }
     input {
       border: 1px solid #000000;
